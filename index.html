@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serenity Palace Hotel | Luxury Redefined</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Preloader -->
+        <div class="preloader" :class="{ hidden: !loading }">
+            <div class="preloader-logo serif">SERENITY PALACE</div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar" :class="{ scrolled: scrolled }">
+            <a href="index.html" class="logo">SERENITY PALACE</a>
+            <ul class="nav-links">
+                <li><a href="index.html">home</a></li>
+                <li><a href="rooms.html">rooms</a></li>
+                <li><a href="services.html">services</a></li>
+                <li><a href="gallery.html" class="active">gallery</a></li>
+                <li><a href="about.html">about</a></li>
+                <li><a href="reviews & contact Us.html">reviews & contact Us</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="lang-toggle" @click="toggleLanguage">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    {{ lang === 'en' ? 'العربية' : 'English' }}
+                </button>
+                <a href="booking.html" class="btn-nav">book</a>
+                <div class="menu-toggle" @click="toggleMobileMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" :class="{ active: mobileMenuOpen }" @click="closeMobileMenu">
+            <div class="mobile-menu-content" @click.stop>
+                <button class="mobile-close" @click="closeMobileMenu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html" @click="closeMobileMenu">home</a></li>
+                    <li><a href="rooms.html" @click="closeMobileMenu">rooms</a></li>
+                    <li><a href="services.html" @click="closeMobileMenu">services</a></li>
+                    <li><a href="gallery.html" class="active" @click="closeMobileMenu">gallery</a></li>
+                    <li><a href="about.html" @click="closeMobileMenu">about</a></li>
+                    <li><a href="reviews & contact Us.html" @click="closeMobileMenu">reviews & contact Us.html</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-media">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1920&q=80" alt="Luxury Hotel Lobby">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <p class="hero-subtitle">{{ t('hero.subtitle') }}</p>
+                <h1 class="hero-title serif">{{ t('hero.title') }}</h1>
+                <p class="hero-description">{{ t('hero.description') }}</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn-primary">{{ t('hero.btnReserve') }}</a>
+                    <a href="#" class="btn-secondary">{{ t('hero.btnExplore') }}</a>
+                </div>
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                        </svg>
+                        <span>{{ t('hero.feature1') }}</span>
+                    </div>
+                    <div class="hero-feature">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                        <span>{{ t('hero.feature2') }}</span>
+                    </div>
+                    <div class="hero-feature">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <span>{{ t('hero.feature3') }}</span>
+                    </div>
+                    <div class="hero-feature">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path>
+                        </svg>
+                        <span>{{ t('hero.feature4') }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>{{ t('hero.scroll') }}</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- Signature Experience -->
+        <section class="section">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-label">{{ t('experience.label') }}</p>
+                <h2 class="section-title serif">{{ t('experience.title') }}</h2>
+                <p class="section-description">{{ t('experience.description') }}</p>
+            </div>
+
+            <div class="experience-grid" data-aos="fade-up" data-aos-delay="100">
+                <div class="experience-image">
+                    <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?w=800&q=80" alt="Personalized Hospitality">
+                </div>
+                <div class="experience-content">
+                    <h3 class="serif">{{ t('exp1.title') }}</h3>
+                    <p>{{ t('exp1.description') }}</p>
+                    <div class="experience-features">
+                        <div class="exp-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>{{ t('exp1.feature1') }}</span>
+                        </div>
+                        <div class="exp-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                            </svg>
+                            <span>{{ t('exp1.feature2') }}</span>
+                        </div>
+                        <div class="exp-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                            </svg>
+                            <span>{{ t('exp1.feature3') }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-grid reverse" data-aos="fade-up" data-aos-delay="100">
+                <div class="experience-image">
+                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&q=80" alt="Luxury Wellness">
+                </div>
+                <div class="experience-content">
+                    <h3 class="serif">{{ t('exp2.title') }}</h3>
+                    <p>{{ t('exp2.description') }}</p>
+                    <div class="experience-features">
+                        <div class="exp-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"></path>
+                            </svg>
+                            <span>{{ t('exp2.feature1') }}</span>
+                        </div>
+                        <div class="exp-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"></path>
+                            </svg>
+                            <span>{{ t('exp2.feature2') }}</span>
+                        </div>
+                        <div class="exp-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span>{{ t('exp2.feature3') }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="fade-up">
+                    <div class="stat-number"><span class="counter" data-target="15">0</span><span class="stat-suffix">+</span></div>
+                    <div class="stat-label">{{ t('stats.years') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number"><span class="counter" data-target="120">0</span></div>
+                    <div class="stat-label">{{ t('stats.suites') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number"><span class="counter" data-target="98">0</span><span class="stat-suffix">%</span></div>
+                    <div class="stat-label">{{ t('stats.satisfaction') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-number"><span class="counter" data-target="24">0</span><span class="stat-suffix">/7</span></div>
+                    <div class="stat-label">{{ t('stats.service') }}</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Rooms -->
+        <section class="rooms-section">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-label">{{ t('rooms.label') }}</p>
+                <h2 class="section-title serif">{{ t('rooms.title') }}</h2>
+                <p class="section-description">{{ t('rooms.description') }}</p>
+            </div>
+
+            <div class="rooms-slider-wrapper">
+                <div class="swiper rooms-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="room-slide">
+                                <div class="room-image">
+                                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1200&q=80" alt="Royal Suite">
+                                </div>
+                                <div class="room-content">
+                                    <p class="room-category">{{ t('room1.category') }}</p>
+                                    <h3 class="room-name serif">{{ t('room1.name') }}</h3>
+                                    <p class="room-description">{{ t('room1.description') }}</p>
+                                    <div class="room-amenities">
+                                        <div class="room-amenity">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                            </svg>
+                                            <span>120 m²</span>
+                                        </div>
+                                        <div class="room-amenity">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="12" cy="7" r="4"></circle>
+                                            </svg>
+                                            <span>{{ t('room.guests', { n: 4 }) }}</span>
+                                        </div>
+                                        <div class="room-amenity">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <path d="M17 18a5 5 0 0 0-10 0"></path>
+                                                <line x1="12" y1="9" x2="12" y2="2"></line>
+                                                <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+                                                <line x1="1" y1="18" x2="3" y2="18"></line>
+                                                <line x1="21" y1="18" x2="23" y2="18"></line>
+                                                <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+                                            </svg>
+                                            <span>{{ t('room.view') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="room-price">$1,200 <span>/ {{ t('room.night') }}</span></div>
+                                    <a href="#" class="btn-primary">{{ t('room.book') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="room-slide">
+                                <div class="room-image">
+                                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=80" alt="Presidential Suite">
+                                </div>
+                                <div class="room-content">
+                                    <p class="room-category">{{ t('room2.category') }}</p>
+                                    <h3 class="room-name serif">{{ t('room2.name') }}</h3>
+                                    <p class="room-description">{{ t('room2.description') }}</p>
+                                    <div class="room-amenities">
+                                        <div class="room-amenity">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                            </svg>
+                                            <span>200 m²</span>
+                                        </div>
+                                        <div class="room-amenity">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="12" cy="7" r="4"></circle>
+                                            </svg>
+                                            <span>{{ t('room.guests', { n: 6 }) }}</span>
+                                        </div>
+                                        <div class="room-amenity">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                            </svg>
+                                            <span>{{ t('room.terrace') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="room-price">$2,500 <span>/ {{ t('room.night') }}</span></div>
+                                    <a href="#" class="btn-primary">{{ t('room.book') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="room-slide">
+                                <div class="room-image">
+                                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=80" alt="Grand Deluxe">
+                                </div>
+                                <div class="room-content">
+                                    <p class="room-category">{{ t('room3.category') }}</p>
+                                    <h3 class="room-name serif">{{ t('room3.name') }}</h3>
+                                    <p class="room-description">{{ t('room3.description') }}</p>
+                                    <div class="room-amenities">
+                                        <div class="room-amenity">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                            </svg>
+                                            <span>85 m²</span>
+                                        </div>
+                                        <div class="room-amenity">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="12" cy="7" r="4"></circle>
+                                            </svg>
+                                            <span>{{ t('room.guests', { n: 2 }) }}</span>
+                                        </div>
+                                        <div class="room-amenity">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"></path>
+                                            </svg>
+                                            <span>{{ t('room.spa') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="room-price">$650 <span>/ {{ t('room.night') }}</span></div>
+                                    <a href="#" class="btn-primary">{{ t('room.book') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rooms-navigation">
+                    <button class="room-nav-btn room-prev">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button class="room-nav-btn room-next">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards -->
+        <section class="awards-section">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-label" style="color: var(--midnight);">{{ t('awards.label') }}</p>
+                <h2 class="section-title serif">{{ t('awards.title') }}</h2>
+            </div>
+            <div class="awards-grid">
+                <div class="award-item" data-aos="fade-up">
+                    <svg class="award-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="8" r="7"></circle>
+                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                    </svg>
+                    <h4 class="award-title serif">{{ t('award1.title') }}</h4>
+                    <p class="award-year">{{ t('award1.year') }}</p>
+                </div>
+                <div class="award-item" data-aos="fade-up" data-aos-delay="100">
+                    <svg class="award-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                    </svg>
+                    <h4 class="award-title serif">{{ t('award2.title') }}</h4>
+                    <p class="award-year">{{ t('award2.year') }}</p>
+                </div>
+                <div class="award-item" data-aos="fade-up" data-aos-delay="200">
+                    <svg class="award-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"></path>
+                    </svg>
+                    <h4 class="award-title serif">{{ t('award3.title') }}</h4>
+                    <p class="award-year">{{ t('award3.year') }}</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials-section">
+            <div class="testimonials-bg"></div>
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-label">{{ t('testimonials.label') }}</p>
+                <h2 class="section-title serif" style="color: var(--ivory);">{{ t('testimonials.title') }}</h2>
+            </div>
+            <div class="swiper testimonials-swiper" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-slide">
+                            <div class="testimonial-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                            </div>
+                            <p class="testimonial-text">"{{ t('testimonial1.text') }}"</p>
+                            <p class="testimonial-author">{{ t('testimonial1.author') }}</p>
+                            <p class="testimonial-location">{{ t('testimonial1.location') }}</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-slide">
+                            <div class="testimonial-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                            </div>
+                            <p class="testimonial-text">"{{ t('testimonial2.text') }}"</p>
+                            <p class="testimonial-author">{{ t('testimonial2.author') }}</p>
+                            <p class="testimonial-location">{{ t('testimonial2.location') }}</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-slide">
+                            <div class="testimonial-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                            </div>
+                            <p class="testimonial-text">"{{ t('testimonial3.text') }}"</p>
+                            <p class="testimonial-author">{{ t('testimonial3.author') }}</p>
+                            <p class="testimonial-location">{{ t('testimonial3.location') }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-pagination"></div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section class="gallery-section">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-label">{{ t('gallery.label') }}</p>
+                <h2 class="section-title serif">{{ t('gallery.title') }}</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-aos="fade-up" @click="openLightbox('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80')">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Gallery 1">
+                    <div class="gallery-overlay">
+                        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35M11 8v6M8 11h6"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100" @click="openLightbox('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=80')">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80" alt="Gallery 2">
+                    <div class="gallery-overlay">
+                        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35M11 8v6M8 11h6"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="150" @click="openLightbox('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80')">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" alt="Gallery 3">
+                    <div class="gallery-overlay">
+                        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35M11 8v6M8 11h6"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200" @click="openLightbox('https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=1200&q=80')">
+                    <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800&q=80" alt="Gallery 4">
+                    <div class="gallery-overlay">
+                        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35M11 8v6M8 11h6"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="250" @click="openLightbox('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80')">
+                    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80" alt="Gallery 5">
+                    <div class="gallery-overlay">
+                        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35M11 8v6M8 11h6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="cta-bg"></div>
+            <div class="cta-content" data-aos="fade-up">
+                <h2 class="cta-title serif">{{ t('cta.title') }}</h2>
+                <p class="cta-description">{{ t('cta.description') }}</p>
+                <a href="#" class="cta-btn">{{ t('cta.button') }}</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">SERENITY PALACE</a>
+                    <p>{{ t('footer.description') }}</p>
+                    <div class="footer-social">
+                        <a href="#">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"></path>
+                            </svg>
+                        </a>
+                        <a href="#">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.explore') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">{{ t('nav.rooms') }}</a></li>
+                        <li><a href="#">{{ t('nav.dining') }}</a></li>
+                        <li><a href="#">{{ t('nav.spa') }}</a></li>
+                        <li><a href="#">{{ t('nav.experiences') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.information') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">{{ t('footer.about') }}</a></li>
+                        <li><a href="#">{{ t('footer.careers') }}</a></li>
+                        <li><a href="#">{{ t('footer.press') }}</a></li>
+                        <li><a href="#">{{ t('footer.privacy') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.contact') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:+971000000000">+971 00 000 0000</a></li>
+                        <li><a href="mailto:info@serenitypalace.com">info@serenitypalace.com</a></li>
+                        <li><a href="#">{{ t('footer.address') }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>{{ t('footer.copyright') }}</p>
+            </div>
+        </footer>
+
+        <!-- Lightbox -->
+        <div class="lightbox" :class="{ active: lightboxOpen }" @click="closeLightbox">
+            <button class="lightbox-close" @click.stop="closeLightbox">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+            <img :src="lightboxImage" alt="Gallery Image">
+        </div>
+    </div>
+<script src="js/index.js"></script>
+    <script></script>
+</body>
+</html>

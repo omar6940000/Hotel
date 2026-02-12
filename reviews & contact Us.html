@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews & Contact | Serenity Palace Hotel</title>
+    <meta name="description" content="Read guest reviews and get in touch with Serenity Palace Hotel. Experience luxury hospitality and exceptional service.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="css/contact.css">
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <!-- Preloader -->
+        <div class="preloader" :class="{ hidden: !loading }">
+            <div class="preloader-logo serif">SERENITY PALACE</div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar" :class="{ scrolled: scrolled }">
+            <a href="index.html" class="logo">SERENITY PALACE</a>
+            <ul class="nav-links">
+                <li><a href="index.html">home</a></li>
+                <li><a href="rooms.html">rooms</a></li>
+                <li><a href="services.html">services</a></li>
+                <li><a href="gallery.html" class="active">gallery</a></li>
+                <li><a href="about.html">about</a></li>
+                <li><a href="reviews & contact Us.html">reviews & contact Us</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="lang-toggle" @click="toggleLanguage">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    {{ lang === 'en' ? 'العربية' : 'English' }}
+                </button>
+                <a href="booking.html" class="btn-nav">book</a>
+                <div class="menu-toggle" @click="toggleMobileMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" :class="{ active: mobileMenuOpen }" @click="closeMobileMenu">
+            <div class="mobile-menu-content" @click.stop>
+                <button class="mobile-close" @click="closeMobileMenu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html" @click="closeMobileMenu">home</a></li>
+                    <li><a href="rooms.html" @click="closeMobileMenu">rooms</a></li>
+                    <li><a href="services.html" @click="closeMobileMenu">services</a></li>
+                    <li><a href="gallery.html" class="active" @click="closeMobileMenu">gallery</a></li>
+                    <li><a href="about.html" @click="closeMobileMenu">about</a></li>
+                    <li><a href="reviews & contact Us.html" @click="closeMobileMenu">reviews & contact Us.html</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80" alt="Luxury Hotel">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <p class="hero-breadcrumb">
+                    <a href="index.html">{{ t('nav.home') }}</a>
+                    <span>―</span>
+                    {{ t('nav.contact') }}
+                </p>
+                <p class="hero-label">{{ t('hero.label') }}</p>
+                <h1 class="hero-title serif">{{ t('hero.title') }}</h1>
+                <p class="hero-description">{{ t('hero.description') }}</p>
+            </div>
+            <div class="hero-scroll">
+                <span>{{ t('hero.scroll') }}</span>
+                <div class="hero-scroll-line"></div>
+            </div>
+        </section>
+        <!-- Stats Bar -->
+        <section class="stats-bar">
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="fade-up">
+                    <div class="stat-number"><span class="counter" data-target="5000">0</span>+</div>
+                    <div class="stat-label">{{ t('stats.reviews') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number"><span class="counter" data-target="98">0</span>%</div>
+                    <div class="stat-label">{{ t('stats.satisfaction') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number"><span class="counter" data-target="4">0</span>.9</div>
+                    <div class="stat-label">{{ t('stats.rating') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-number"><span class="counter" data-target="24">0</span>/7</div>
+                    <div class="stat-label">{{ t('stats.support') }}</div>
+                </div>
+            </div>
+        </section>
+        <!-- Featured Review -->
+        <section class="reviews-featured">
+            <div class="featured-review" data-aos="fade-up">
+                <div class="featured-review-image">
+                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80" alt="Presidential Suite" loading="lazy">
+                    <div class="featured-badge">{{ t('featured.badge') }}</div>
+                </div>
+                <div class="featured-review-content">
+                    <svg class="featured-quote-icon" viewBox="0 0 24 24">
+                        <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21c0 1 0 1 1 1z"/>
+                        <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+                    </svg>
+                    <p class="featured-review-text">"{{ t('featured.text') }}"</p>
+                    <div class="featured-review-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Guest" class="featured-author-image">
+                        <div class="featured-author-info">
+                            <h4>{{ t('featured.author') }}</h4>
+                            <p>{{ t('featured.location') }}</p>
+                            <div class="featured-rating">
+                                <svg v-for="n in 5" :key="n" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Reviews Grid -->
+        <section class="reviews-section">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">{{ t('reviews.label') }}</span>
+                <h2 class="section-title serif">{{ t('reviews.title') }}</h2>
+                <p class="section-description">{{ t('reviews.description') }}</p>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-card" v-for="(review, index) in reviews" :key="index" data-aos="fade-up" :data-aos-delay="index * 100">
+                    <div class="review-header">
+                        <div class="review-rating">
+                            <svg v-for="n in 5" :key="n" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <span class="review-source">{{ review.source }}</span>
+                    </div>
+                    <p class="review-text">"{{ t(review.text) }}"</p>
+                    <div class="review-author">
+                        <img :src="review.image" :alt="review.author" class="review-author-image">
+                        <div class="review-author-info">
+                            <h5>{{ review.author }}</h5>
+                            <p>{{ review.location }}</p>
+                            <span class="review-room">{{ t(review.room) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Testimonials Slider -->
+        <section class="testimonials-section">
+            <div class="testimonials-pattern"></div>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">{{ t('testimonials.label') }}</span>
+                <h2 class="section-title serif" style="color: var(--ivory);">{{ t('testimonials.title') }}</h2>
+            </div>
+            <div class="testimonials-wrapper" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper testimonials-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" v-for="(testimonial, index) in testimonials" :key="index">
+                            <div class="testimonial-slide">
+                                <svg class="testimonial-quote" viewBox="0 0 24 24">
+                                    <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21c0 1 0 1 1 1z"/>
+                                    <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+                                </svg>
+                                <p class="testimonial-text">"{{ t(testimonial.text) }}"</p>
+                                <div class="testimonial-stars">
+                                    <svg v-for="n in 5" :key="n" viewBox="0 0 24 24">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                </div>
+                                <p class="testimonial-author">{{ testimonial.author }}</p>
+                                <p class="testimonial-location">{{ testimonial.location }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonials-pagination"></div>
+                </div>
+                <div class="testimonials-nav">
+                    <button class="testimonials-nav-btn testimonials-prev">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button class="testimonials-nav-btn testimonials-next">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="contact-container">
+                <div class="contact-info" >
+                    <p class="contact-label">{{ t('contact.label') }}</p>
+                    <h2 class="contact-title serif">{{ t('contact.title') }}</h2>
+                    <p class="contact-description">{{ t('contact.description') }}</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
+                            <div class="contact-item-content">
+                                <h4>{{ t('contact.address.title') }}</h4>
+                                <p>{{ t('contact.address.line1') }}<br>{{ t('contact.address.line2') }}</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                            </div>
+                            <div class="contact-item-content">
+                                <h4>{{ t('contact.phone.title') }}</h4>
+                                <p>
+                                    <a href="tel:+971000000000">+971 00 000 0000</a><br>
+                                    <a href="tel:+971000000001">+971 00 000 0001</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
+                            <div class="contact-item-content">
+                                <h4>{{ t('contact.email.title') }}</h4>
+                                <p>
+                                    <a href="mailto:info@serenitypalace.com">info@serenitypalace.com</a><br>
+                                    <a href="mailto:reservations@serenitypalace.com">reservations@serenitypalace.com</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <div class="contact-item-content">
+                                <h4>{{ t('contact.hours.title') }}</h4>
+                                <p>{{ t('contact.hours.reception') }}<br>{{ t('contact.hours.concierge') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-social">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper" >
+                    <h3 class="form-title">{{ t('form.title') }}</h3>
+                    <p class="form-subtitle">{{ t('form.subtitle') }}</p>
+                    
+                    <form @submit.prevent="submitForm" class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                {{ t('form.name') }}
+                            </label>
+                            <input type="text" class="form-input" :placeholder="t('form.namePlaceholder')" v-model="form.name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                                {{ t('form.email') }}
+                            </label>
+                            <input type="email" class="form-input" :placeholder="t('form.emailPlaceholder')" v-model="form.email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                                {{ t('form.phone') }}
+                            </label>
+                            <input type="tel" class="form-input" :placeholder="t('form.phonePlaceholder')" v-model="form.phone">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                                {{ t('form.subject') }}
+                            </label>
+                            <select class="form-select" v-model="form.subject" required>
+                                <option value="">{{ t('form.subjectPlaceholder') }}</option>
+                                <option value="reservation">{{ t('form.subjects.reservation') }}</option>
+                                <option value="inquiry">{{ t('form.subjects.inquiry') }}</option>
+                                <option value="feedback">{{ t('form.subjects.feedback') }}</option>
+                                <option value="partnership">{{ t('form.subjects.partnership') }}</option>
+                                <option value="other">{{ t('form.subjects.other') }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <line x1="4" y1="9" x2="20" y2="9"></line>
+                                    <line x1="4" y1="15" x2="20" y2="15"></line>
+                                    <line x1="10" y1="3" x2="8" y2="21"></line>
+                                    <line x1="16" y1="3" x2="14" y2="21"></line>
+                                </svg>
+                                {{ t('form.message') }}
+                            </label>
+                            <textarea class="form-textarea" :placeholder="t('form.messagePlaceholder')" v-model="form.message" required></textarea>
+                        </div>
+                        <div class="form-submit">
+                            <button type="button" class="btn-reset" @click="resetForm">{{ t('form.reset') }}</button>
+                            <button type="submit" class="btn-submit">
+                                {{ t('form.submit') }}
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!-- Map Section -->
+        <section class="map-section">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.7!2d55.27!3d25.19!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDExJzI0LjAiTiA1NcKwMTYnMTIuMCJF!5e0!3m2!1sen!2sae!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+            <div class="map-overlay" >
+                <h4>{{ t('map.title') }}</h4>
+                <p>{{ t('map.description') }}</p>
+                <a href="https://maps.google.com" target="_blank" class="map-btn">
+                    {{ t('map.directions') }}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"></path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-bg">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1920&q=80" alt="Luxury Pool">
+            </div>
+            <div class="cta-overlay"></div>
+            <div class="cta-content" >
+                <p class="cta-label">{{ t('cta.label') }}</p>
+                <h2 class="cta-title serif">{{ t('cta.title') }}</h2>
+                <p class="cta-description">{{ t('cta.description') }}</p>
+                <div class="cta-buttons">
+                    <a href="booking.html" class="cta-btn">
+                        {{ t('cta.bookNow') }}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                    <a href="tel:+971000000000" class="cta-btn cta-btn-outline">
+                        {{ t('cta.callUs') }}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">SERENITY PALACE</a>
+                    <p>{{ t('footer.description') }}</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.explore') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="rooms.html">{{ t('nav.rooms') }}</a></li>
+                        <li><a href="services.html">{{ t('nav.services') }}</a></li>
+                        <li><a href="gallery.html">{{ t('nav.gallery') }}</a></li>
+                        <li><a href="#">{{ t('nav.experiences') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.information') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">{{ t('nav.about') }}</a></li>
+                        <li><a href="#">{{ t('footer.careers') }}</a></li>
+                        <li><a href="#">{{ t('footer.press') }}</a></li>
+                        <li><a href="#">{{ t('footer.privacy') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.contactUs') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:+971000000000">+971 00 000 0000</a></li>
+                        <li><a href="mailto:info@serenitypalace.com">info@serenitypalace.com</a></li>
+                        <li><a href="#">{{ t('footer.address') }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>{{ t('footer.copyright') }}</p>
+            </div>
+        </footer>
+        <!-- Success Modal -->
+        <div class="modal-overlay" :class="{ active: showModal }" @click="closeModal">
+            <div class="modal-content" @click.stop>
+                <div class="modal-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                </div>
+                <h2 class="modal-title serif">{{ t('modal.title') }}</h2>
+                <p class="modal-text">{{ t('modal.text') }}</p>
+                <button class="modal-btn" @click="closeModal">{{ t('modal.btn') }}</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/contact.js"></script>
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve Your Stay | Serenity Palace Hotel</title>
+    <meta name="description" content="Book your exceptional stay at Serenity Palace Hotel. Experience luxury, elegance, and world-class hospitality.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="css/book.css">
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <!-- Preloader -->
+        <div class="preloader" :class="{ hidden: !loading }">
+            <div class="preloader-logo serif">SERENITY PALACE</div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar" :class="{ scrolled: scrolled }">
+            <a href="index.html" class="logo">SERENITY PALACE</a>
+            <ul class="nav-links">
+                <li><a href="index.html">home</a></li>
+                <li><a href="rooms.html">rooms</a></li>
+                <li><a href="services.html">services</a></li>
+                <li><a href="gallery.html" class="active">gallery</a></li>
+                <li><a href="about.html">about</a></li>
+                <li><a href="reviews & contact Us.html">reviews & contact Us</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="lang-toggle" @click="toggleLanguage">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    {{ lang === 'en' ? 'العربية' : 'English' }}
+                </button>
+                <a href="booking.html" class="btn-nav">book</a>
+                <div class="menu-toggle" @click="toggleMobileMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" :class="{ active: mobileMenuOpen }" @click="closeMobileMenu">
+            <div class="mobile-menu-content" @click.stop>
+                <button class="mobile-close" @click="closeMobileMenu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html" @click="closeMobileMenu">home</a></li>
+                    <li><a href="rooms.html" @click="closeMobileMenu">rooms</a></li>
+                    <li><a href="services.html" @click="closeMobileMenu">services</a></li>
+                    <li><a href="gallery.html" class="active" @click="closeMobileMenu">gallery</a></li>
+                    <li><a href="about.html" @click="closeMobileMenu">about</a></li>
+                    <li><a href="reviews & contact Us.html" @click="closeMobileMenu">reviews & contact Us.html</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80" alt="Luxury Hotel Lobby">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <p class="hero-breadcrumb">
+                    <a href="index.html">{{ t('nav.home') }}</a>
+                    <span>―</span>
+                    {{ t('nav.book') }}
+                </p>
+                <h1 class="hero-title serif">{{ t('hero.title') }}</h1>
+                <p class="hero-description">{{ t('hero.description') }}</p>
+            </div>
+        </section>
+
+        <!-- Trust Bar -->
+        <div class="trust-bar">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span>{{ t('trust.secure') }}</span>
+                </div>
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                    </svg>
+                    <span>{{ t('trust.rated') }}</span>
+                </div>
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    <span>{{ t('trust.support') }}</span>
+                </div>
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    <span>{{ t('trust.confirm') }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Section -->
+        <section class="booking-section">
+            <div class="booking-container">
+                <!-- Booking Form -->
+                <div class="booking-form" data-aos="fade-up">
+                    <!-- Stay Details -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <div class="section-number">1</div>
+                            <h2 class="section-title">{{ t('form.stayDetails') }}</h2>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    {{ t('form.checkIn') }}
+                                </label>
+                                <input type="text" class="form-input" id="checkin" :placeholder="t('form.selectDate')" v-model="booking.checkIn">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    {{ t('form.checkOut') }}
+                                </label>
+                                <input type="text" class="form-input" id="checkout" :placeholder="t('form.selectDate')" v-model="booking.checkOut">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                    {{ t('form.guests') }}
+                                </label>
+                                <select class="form-select" v-model="booking.guests">
+                                    <option value="1">1 {{ t('form.guest') }}</option>
+                                    <option value="2">2 {{ t('form.guestsLabel') }}</option>
+                                    <option value="3">3 {{ t('form.guestsLabel') }}</option>
+                                    <option value="4">4 {{ t('form.guestsLabel') }}</option>
+                                    <option value="5">5 {{ t('form.guestsLabel') }}</option>
+                                    <option value="6">6 {{ t('form.guestsLabel') }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                    </svg>
+                                    {{ t('form.roomType') }}
+                                </label>
+                                <select class="form-select" v-model="booking.roomType">
+                                    <option v-for="room in rooms" :key="room.id" :value="room.id">
+                                        {{ t(room.name) }} - ${{ room.price }}/{{ t('form.night') }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Guest Information -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <div class="section-number">2</div>
+                            <h2 class="section-title">{{ t('form.guestInfo') }}</h2>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    {{ t('form.fullName') }}
+                                </label>
+                                <input type="text" class="form-input" :placeholder="t('form.enterName')" v-model="booking.name">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    {{ t('form.email') }}
+                                </label>
+                                <input type="email" class="form-input" :placeholder="t('form.enterEmail')" v-model="booking.email">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                    {{ t('form.phone') }}
+                                </label>
+                                <input type="tel" class="form-input" :placeholder="t('form.enterPhone')" v-model="booking.phone">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                    </svg>
+                                    {{ t('form.country') }}
+                                </label>
+                                <select class="form-select" v-model="booking.country">
+                                    <option value="">{{ t('form.selectCountry') }}</option>
+                                    <option value="AE">{{ t('countries.ae') }}</option>
+                                    <option value="SA">{{ t('countries.sa') }}</option>
+                                    <option value="US">{{ t('countries.us') }}</option>
+                                    <option value="UK">{{ t('countries.uk') }}</option>
+                                    <option value="FR">{{ t('countries.fr') }}</option>
+                                    <option value="DE">{{ t('countries.de') }}</option>
+                                    <option value="OTHER">{{ t('countries.other') }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label class="form-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <line x1="4" y1="9" x2="20" y2="9"></line>
+                                        <line x1="4" y1="15" x2="20" y2="15"></line>
+                                        <line x1="10" y1="3" x2="8" y2="21"></line>
+                                        <line x1="16" y1="3" x2="14" y2="21"></line>
+                                    </svg>
+                                    {{ t('form.requests') }}
+                                </label>
+                                <textarea class="form-textarea" :placeholder="t('form.enterRequests')" v-model="booking.requests"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Extras -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <div class="section-number">3</div>
+                            <h2 class="section-title">{{ t('form.extras') }}</h2>
+                        </div>
+                        <div class="extras-grid">
+                            <label class="extra-item">
+                                <input type="checkbox" v-model="booking.extras.airport">
+                                <div class="extra-card">
+                                    <svg class="extra-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path>
+                                    </svg>
+                                    <div class="extra-name">{{ t('extras.airport') }}</div>
+                                    <div class="extra-price">+$75</div>
+                                </div>
+                            </label>
+                            <label class="extra-item">
+                                <input type="checkbox" v-model="booking.extras.breakfast">
+                                <div class="extra-card">
+                                    <svg class="extra-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"></path>
+                                    </svg>
+                                    <div class="extra-name">{{ t('extras.breakfast') }}</div>
+                                    <div class="extra-price">+$45/{{ t('form.night') }}</div>
+                                </div>
+                            </label>
+                            <label class="extra-item">
+                                <input type="checkbox" v-model="booking.extras.spa">
+                                <div class="extra-card">
+                                    <svg class="extra-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M12 22c4-4 8-7.5 8-12a8 8 0 1 0-16 0c0 4.5 4 8 8 12z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <div class="extra-name">{{ t('extras.spa') }}</div>
+                                    <div class="extra-price">+$120</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Payment -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <div class="section-number">4</div>
+                            <h2 class="section-title">{{ t('form.payment') }}</h2>
+                        </div>
+                        <div class="payment-methods">
+                            <label class="payment-method">
+                                <input type="radio" name="payment" value="card" v-model="booking.paymentMethod">
+                                <div class="payment-card">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                                    </svg>
+                                    <span>{{ t('payment.card') }}</span>
+                                </div>
+                            </label>
+                            <label class="payment-method">
+                                <input type="radio" name="payment" value="hotel" v-model="booking.paymentMethod">
+                                <div class="payment-card">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                    </svg>
+                                    <span>{{ t('payment.hotel') }}</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="card-fields" :class="{ active: booking.paymentMethod === 'card' }">
+                            <div class="card-grid">
+                                <div class="form-group">
+                                    <label class="form-label">{{ t('payment.cardNumber') }}</label>
+                                    <input type="text" class="form-input" placeholder="1234 5678 9012 3456" v-model="booking.cardNumber" maxlength="19">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{{ t('payment.expiry') }}</label>
+                                    <input type="text" class="form-input" placeholder="MM/YY" v-model="booking.cardExpiry" maxlength="5">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{{ t('payment.cvv') }}</label>
+                                    <input type="text" class="form-input" placeholder="123" v-model="booking.cardCvv" maxlength="4">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{{ t('payment.cardName') }}</label>
+                                    <input type="text" class="form-input" :placeholder="t('payment.nameOnCard')" v-model="booking.cardName">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Summary -->
+                <div class="booking-summary" data-aos="fade-up" data-aos-delay="100">
+                    <div class="summary-header">
+                        <h3 class="summary-title">{{ t('summary.title') }}</h3>
+                        <p class="summary-subtitle">{{ t('summary.subtitle') }}</p>
+                    </div>
+
+                    <div class="summary-room">
+                        <img :src="selectedRoom.image" :alt="t(selectedRoom.name)" class="summary-room-image">
+                        <h4 class="summary-room-name">{{ t(selectedRoom.name) }}</h4>
+                        <div class="summary-room-features">
+                            <div class="summary-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                </svg>
+                                <span>{{ selectedRoom.size }} m²</span>
+                            </div>
+                            <div class="summary-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                </svg>
+                                <span>{{ selectedRoom.guests }} {{ t('form.guestsLabel') }}</span>
+                            </div>
+                            <div class="summary-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M2 20h20M5 20v-8h14v8M8 12V8c0-2.2 1.8-4 4-4s4 1.8 4 4v4"></path>
+                                </svg>
+                                <span>{{ t(selectedRoom.view) }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>{{ t('summary.checkIn') }}</span>
+                            <span>{{ booking.checkIn || '—' }}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>{{ t('summary.checkOut') }}</span>
+                            <span>{{ booking.checkOut || '—' }}</span>
+                        </div>
+                        <div class="summary-row highlight">
+                            <span>{{ t('summary.nights') }}</span>
+                            <span>{{ nights }} {{ nights === 1 ? t('form.night') : t('summary.nightsLabel') }}</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span>{{ t('summary.roomRate') }}</span>
+                            <span>${{ selectedRoom.price }} × {{ nights }}</span>
+                        </div>
+                        <div class="summary-row" v-if="booking.extras.airport">
+                            <span>{{ t('extras.airport') }}</span>
+                            <span>+$75</span>
+                        </div>
+                        <div class="summary-row" v-if="booking.extras.breakfast">
+                            <span>{{ t('extras.breakfast') }}</span>
+                            <span>+${{ 45 * nights }}</span>
+                        </div>
+                        <div class="summary-row" v-if="booking.extras.spa">
+                            <span>{{ t('extras.spa') }}</span>
+                            <span>+$120</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span>{{ t('summary.subtotal') }}</span>
+                            <span>${{ subtotal.toLocaleString() }}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>{{ t('summary.tax') }} (10%)</span>
+                            <span>${{ tax.toLocaleString() }}</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-total">
+                        <div class="total-row">
+                            <span class="total-label">{{ t('summary.total') }}</span>
+                            <span class="total-amount">${{ total.toLocaleString() }}</span>
+                        </div>
+                        <p class="total-note">{{ t('summary.note') }}</p>
+                    </div>
+
+                    <div class="summary-action">
+                        <button class="btn-book" @click="confirmBooking" :disabled="!isFormValid">
+                            {{ t('summary.confirm') }}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <p class="summary-secure">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            {{ t('summary.secure') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Modal -->
+        <div class="modal-overlay" :class="{ active: showModal }" @click="closeModal">
+            <div class="modal-content" @click.stop>
+                <div class="modal-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                </div>
+                <h2 class="modal-title serif">{{ t('modal.title') }}</h2>
+                <p class="modal-text">{{ t('modal.text') }}</p>
+                <div class="modal-ref">
+                    <p class="modal-ref-label">{{ t('modal.refLabel') }}</p>
+                    <p class="modal-ref-number">{{ bookingRef }}</p>
+                </div>
+                <button class="modal-btn" @click="closeModal">{{ t('modal.btn') }}</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">SERENITY PALACE</a>
+                    <p>{{ t('footer.description') }}</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.explore') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="rooms.html">{{ t('nav.rooms') }}</a></li>
+                        <li><a href="#">{{ t('nav.dining') }}</a></li>
+                        <li><a href="#">{{ t('nav.spa') }}</a></li>
+                        <li><a href="#">{{ t('nav.experiences') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.information') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">{{ t('footer.about') }}</a></li>
+                        <li><a href="#">{{ t('footer.careers') }}</a></li>
+                        <li><a href="#">{{ t('footer.press') }}</a></li>
+                        <li><a href="#">{{ t('footer.privacy') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.contact') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:+971000000000">+971 00 000 0000</a></li>
+                        <li><a href="mailto:reservations@serenitypalace.com">reservations@serenitypalace.com</a></li>
+                        <li><a href="#">{{ t('footer.address') }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>{{ t('footer.copyright') }}</p>
+            </div>
+        </footer>
+    </div>
+<script src="js/book.js"></script>
+</body>
+</html>

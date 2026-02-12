@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Suites & Rooms | Serenity Palace Hotel</title>
+    <meta name="description" content="Experience unparalleled luxury in our meticulously crafted suites. Each room is a sanctuary of elegance and comfort.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="css/room.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Preloader -->
+        <div class="preloader" :class="{ hidden: !loading }">
+            <div class="preloader-logo serif">SERENITY PALACE</div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar" :class="{ scrolled: scrolled }">
+            <a href="index.html" class="logo">SERENITY PALACE</a>
+            <ul class="nav-links">
+                <li><a href="index.html">home</a></li>
+                <li><a href="rooms.html">rooms</a></li>
+                <li><a href="services.html">services</a></li>
+                <li><a href="gallery.html" class="active">gallery</a></li>
+                <li><a href="about.html">about</a></li>
+                <li><a href="reviews & contact Us.html">reviews & contact Us</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="lang-toggle" @click="toggleLanguage">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    {{ lang === 'en' ? 'العربية' : 'English' }}
+                </button>
+                <a href="booking.html" class="btn-nav">book</a>
+                <div class="menu-toggle" @click="toggleMobileMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" :class="{ active: mobileMenuOpen }" @click="closeMobileMenu">
+            <div class="mobile-menu-content" @click.stop>
+                <button class="mobile-close" @click="closeMobileMenu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html" @click="closeMobileMenu">home</a></li>
+                    <li><a href="rooms.html" @click="closeMobileMenu">rooms</a></li>
+                    <li><a href="services.html" @click="closeMobileMenu">services</a></li>
+                    <li><a href="gallery.html" class="active" @click="closeMobileMenu">gallery</a></li>
+                    <li><a href="about.html" @click="closeMobileMenu">about</a></li>
+                    <li><a href="reviews & contact Us.html" @click="closeMobileMenu">reviews & contact Us.html</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg">
+                <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1920&q=80" alt="Luxury Suite">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <p class="hero-breadcrumb">
+                    <a href="index.html">{{ t('nav.home') }}</a>
+                    <span>―</span>
+                    {{ t('nav.rooms') }}
+                </p>
+                <p class="hero-label">{{ t('hero.label') }}</p>
+                <h1 class="hero-title serif">{{ t('hero.title') }} <span>{{ t('hero.titleAccent') }}</span></h1>
+                <p class="hero-description">{{ t('hero.description') }}</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">120</div>
+                        <div class="hero-stat-label">{{ t('hero.statSuites') }}</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">6</div>
+                        <div class="hero-stat-label">{{ t('hero.statTypes') }}</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">5★</div>
+                        <div class="hero-stat-label">{{ t('hero.statRating') }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-scroll">
+                <span>{{ t('hero.scroll') }}</span>
+                <div class="hero-scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="filter-section">
+            <div class="filter-wrapper" data-aos="fade-up">
+                <div class="filter-group">
+                    <label class="filter-label">{{ t('filter.price') }}</label>
+                    <select class="filter-select" v-model="filters.price">
+                        <option value="">{{ t('filter.all') }}</option>
+                        <option value="0-700">{{ t('filter.under') }} $700</option>
+                        <option value="700-1500">$700 - $1,500</option>
+                        <option value="1500-2500">$1,500 - $2,500</option>
+                        <option value="2500+">$2,500+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">{{ t('filter.guests') }}</label>
+                    <select class="filter-select" v-model="filters.guests">
+                        <option value="">{{ t('filter.all') }}</option>
+                        <option value="2">2 {{ t('filter.persons') }}</option>
+                        <option value="4">4 {{ t('filter.persons') }}</option>
+                        <option value="6">6+ {{ t('filter.persons') }}</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">{{ t('filter.view') }}</label>
+                    <select class="filter-select" v-model="filters.view">
+                        <option value="">{{ t('filter.all') }}</option>
+                        <option value="city">{{ t('filter.cityView') }}</option>
+                        <option value="sea">{{ t('filter.seaView') }}</option>
+                        <option value="garden">{{ t('filter.gardenView') }}</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">{{ t('filter.sortBy') }}</label>
+                    <select class="filter-select" v-model="sortBy">
+                        <option value="recommended">{{ t('filter.recommended') }}</option>
+                        <option value="priceLow">{{ t('filter.priceLow') }}</option>
+                        <option value="priceHigh">{{ t('filter.priceHigh') }}</option>
+                    </select>
+                </div>
+                <div class="filter-actions">
+                    <button class="filter-reset" @click="resetFilters">{{ t('filter.reset') }}</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rooms Showcase -->
+        <section class="rooms-showcase">
+            <template v-if="filteredRooms.length > 0">
+                <template v-for="(room, index) in filteredRooms" :key="room.id">
+                    <div class="room-feature" :class="{ reverse: index % 2 !== 0 }" data-aos="fade-up">
+                        <div class="room-gallery">
+                            <div class="room-badge" v-if="room.badge">{{ t(room.badge) }}</div>
+                            <div class="swiper room-swiper" :id="'room-swiper-' + room.id">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide" v-for="(img, imgIdx) in room.images" :key="imgIdx">
+                                        <img :src="img" :alt="t(room.name)" loading="lazy">
+                                    </div>
+                                </div>
+                                <div class="room-swiper-pagination" :id="'pagination-' + room.id"></div>
+                            </div>
+                            <div class="room-nav">
+                                <button class="room-nav-btn" :class="'prev-' + room.id">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                                    </svg>
+                                </button>
+                                <button class="room-nav-btn" :class="'next-' + room.id">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="room-details">
+                            <p class="room-category">{{ t(room.category) }}</p>
+                            <h2 class="room-name serif">{{ t(room.name) }}</h2>
+                            <div class="room-price">${{ room.price }} <span>/ {{ t('room.night') }}</span></div>
+                            <p class="room-description">{{ t(room.description) }}</p>
+                            <div class="room-amenities">
+                                <div class="room-amenity" v-for="amenity in room.amenities.slice(0, 6)" :key="amenity">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M20 6L9 17l-5-5"></path>
+                                    </svg>
+                                    <span>{{ t(amenity) }}</span>
+                                </div>
+                            </div>
+                            <div class="room-specs">
+                                <div class="room-spec">
+                                    <span class="room-spec-value">{{ room.size }}</span>
+                                    <span class="room-spec-label">{{ t('room.sqm') }}</span>
+                                </div>
+                                <div class="room-spec">
+                                    <span class="room-spec-value">{{ room.guests }}</span>
+                                    <span class="room-spec-label">{{ t('room.guests') }}</span>
+                                </div>
+                                <div class="room-spec">
+                                    <span class="room-spec-value">{{ room.beds }}</span>
+                                    <span class="room-spec-label">{{ t('room.beds') }}</span>
+                                </div>
+                            </div>
+                            <div class="room-buttons">
+                                <a href="#" class="btn-primary">
+                                    {{ t('room.book') }}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <a href="#" class="btn-outline">{{ t('room.details') }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="room-divider" v-if="index < filteredRooms.length - 1"></div>
+                </template>
+            </template>
+            <div class="no-results" v-else data-aos="fade-up">
+                <svg class="no-results-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                    <path d="M8 11h6"></path>
+                </svg>
+                <h3 class="serif">{{ t('noResults.title') }}</h3>
+                <p>{{ t('noResults.description') }}</p>
+                <button class="btn-primary" @click="resetFilters">{{ t('filter.reset') }}</button>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-pattern"></div>
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="fade-up">
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <div class="stat-number"><span class="counter" data-target="120">0</span></div>
+                    <div class="stat-label">{{ t('stats.suites') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                    </svg>
+                    <div class="stat-number"><span class="counter" data-target="98">0</span><span>%</span></div>
+                    <div class="stat-label">{{ t('stats.satisfaction') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <div class="stat-number"><span class="counter" data-target="24">0</span><span>/7</span></div>
+                    <div class="stat-label">{{ t('stats.service') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="8" r="7"></circle>
+                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                    </svg>
+                    <div class="stat-number"><span class="counter" data-target="15">0</span><span>+</span></div>
+                    <div class="stat-label">{{ t('stats.years') }}</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="comparison-section">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">{{ t('comparison.label') }}</span>
+                <h2 class="section-title serif">{{ t('comparison.title') }}</h2>
+                <p class="section-description">{{ t('comparison.description') }}</p>
+            </div>
+            <div class="comparison-wrapper" data-aos="fade-up" data-aos-delay="100">
+                <div class="comparison-selector">
+                    <div class="comparison-select-group">
+                        <label class="comparison-select-label">{{ t('comparison.first') }}</label>
+                        <select class="comparison-select" v-model="compare.room1">
+                            <option v-for="room in rooms" :key="room.id" :value="room.id">{{ t(room.name) }}</option>
+                        </select>
+                    </div>
+                    <div class="comparison-select-group">
+                        <label class="comparison-select-label">{{ t('comparison.second') }}</label>
+                        <select class="comparison-select" v-model="compare.room2">
+                            <option v-for="room in rooms" :key="room.id" :value="room.id">{{ t(room.name) }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="comparison-table">
+                    <div class="comparison-row header">
+                        <div class="comparison-cell">{{ t('comparison.features') }}</div>
+                        <div class="comparison-cell">{{ t(getRoom(compare.room1).name) }}</div>
+                        <div class="comparison-cell">{{ t(getRoom(compare.room2).name) }}</div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">{{ t('comparison.size') }}</div>
+                        <div class="comparison-cell">{{ getRoom(compare.room1).size }} m²</div>
+                        <div class="comparison-cell">{{ getRoom(compare.room2).size }} m²</div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">{{ t('comparison.maxGuests') }}</div>
+                        <div class="comparison-cell">{{ getRoom(compare.room1).guests }}</div>
+                        <div class="comparison-cell">{{ getRoom(compare.room2).guests }}</div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">{{ t('comparison.viewType') }}</div>
+                        <div class="comparison-cell">{{ t('filter.' + getRoom(compare.room1).view + 'View') }}</div>
+                        <div class="comparison-cell">{{ t('filter.' + getRoom(compare.room2).view + 'View') }}</div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">{{ t('comparison.terrace') }}</div>
+                        <div class="comparison-cell">
+                            <svg v-if="getRoom(compare.room1).terrace" class="comparison-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+                            <svg v-else class="comparison-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                        </div>
+                        <div class="comparison-cell">
+                            <svg v-if="getRoom(compare.room2).terrace" class="comparison-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+                            <svg v-else class="comparison-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                        </div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">{{ t('comparison.butler') }}</div>
+                        <div class="comparison-cell">
+                            <svg v-if="getRoom(compare.room1).butler" class="comparison-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+                            <svg v-else class="comparison-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                        </div>
+                        <div class="comparison-cell">
+                            <svg v-if="getRoom(compare.room2).butler" class="comparison-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+                            <svg v-else class="comparison-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                        </div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">{{ t('comparison.price') }}</div>
+                        <div class="comparison-cell">${{ getRoom(compare.room1).price }} / {{ t('room.night') }}</div>
+                        <div class="comparison-cell">${{ getRoom(compare.room2).price }} / {{ t('room.night') }}</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">{{ t('gallery.label') }}</span>
+                <h2 class="section-title serif">{{ t('gallery.title') }}</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" v-for="(img, index) in galleryImages" :key="index" 
+                     data-aos="fade-up" :data-aos-delay="index * 50" @click="openLightbox(img)">
+                    <img :src="img" :alt="'Suite Gallery ' + (index + 1)" loading="lazy">
+                    <div class="gallery-overlay">
+                        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35M11 8v6M8 11h6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="testimonials-bg"></div>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">{{ t('testimonials.label') }}</span>
+                <h2 class="section-title serif" style="color: var(--ivory);">{{ t('testimonials.title') }}</h2>
+            </div>
+            <div class="testimonials-wrapper" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper testimonials-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" v-for="(testimonial, index) in testimonials" :key="index">
+                            <div class="testimonial-slide">
+                                <svg class="testimonial-quote" viewBox="0 0 24 24">
+                                    <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21c0 1 0 1 1 1z"/>
+                                    <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+                                </svg>
+                                <p class="testimonial-room">{{ t(testimonial.room) }}</p>
+                                <p class="testimonial-text">"{{ t(testimonial.text) }}"</p>
+                                <div class="testimonial-stars">
+                                    <svg v-for="n in 5" :key="n" viewBox="0 0 24 24">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                </div>
+                                <p class="testimonial-author">{{ testimonial.author }}</p>
+                                <p class="testimonial-location">{{ testimonial.location }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonials-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-bg">
+                <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1920&q=80" alt="Luxury Suite">
+            </div>
+            <div class="cta-overlay"></div>
+            <div class="cta-content" data-aos="fade-up">
+                <p class="cta-label">{{ t('cta.label') }}</p>
+                <h2 class="cta-title serif">{{ t('cta.title') }}</h2>
+                <p class="cta-description">{{ t('cta.description') }}</p>
+                <a href="#" class="cta-btn">
+                    {{ t('cta.button') }}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">SERENITY PALACE</a>
+                    <p>{{ t('footer.description') }}</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.explore') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="rooms.html">{{ t('nav.rooms') }}</a></li>
+                        <li><a href="#">{{ t('nav.dining') }}</a></li>
+                        <li><a href="#">{{ t('nav.spa') }}</a></li>
+                        <li><a href="#">{{ t('nav.experiences') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.information') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">{{ t('footer.about') }}</a></li>
+                        <li><a href="#">{{ t('footer.careers') }}</a></li>
+                        <li><a href="#">{{ t('footer.press') }}</a></li>
+                        <li><a href="#">{{ t('footer.privacy') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.contact') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:+971000000000">+971 00 000 0000</a></li>
+                        <li><a href="mailto:reservations@serenitypalace.com">reservations@serenitypalace.com</a></li>
+                        <li><a href="#">{{ t('footer.address') }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>{{ t('footer.copyright') }}</p>
+            </div>
+        </footer>
+
+        <!-- Lightbox -->
+        <div class="lightbox" :class="{ active: lightboxOpen }" @click="closeLightbox">
+            <button class="lightbox-close" @click.stop="closeLightbox">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+            <img :src="lightboxImage" alt="Gallery Image">
+        </div>
+    </div>
+<script src="js/room.js"></script>
+</body>
+</html>

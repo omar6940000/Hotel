@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | Serenity Palace Hotel</title>
+    <meta name="description" content="Discover the story behind Serenity Palace Hotel. A legacy of luxury, excellence, and unforgettable experiences since 2009.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="css/about.css">
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <!-- Preloader -->
+        <!-- Preloader -->
+        <div class="preloader" :class="{ hidden: !loading }">
+            <div class="preloader-logo serif">SERENITY PALACE</div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar" :class="{ scrolled: scrolled }">
+            <a href="index.html" class="logo">SERENITY PALACE</a>
+            <ul class="nav-links">
+                <li><a href="index.html">home</a></li>
+                <li><a href="rooms.html">rooms</a></li>
+                <li><a href="services.html">services</a></li>
+                <li><a href="gallery.html" class="active">gallery</a></li>
+                <li><a href="about.html">about</a></li>
+                <li><a href="reviews & contact Us.html">reviews & contact Us</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="lang-toggle" @click="toggleLanguage">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    {{ lang === 'en' ? 'العربية' : 'English' }}
+                </button>
+                <a href="booking.html" class="btn-nav">book</a>
+                <div class="menu-toggle" @click="toggleMobileMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" :class="{ active: mobileMenuOpen }" @click="closeMobileMenu">
+            <div class="mobile-menu-content" @click.stop>
+                <button class="mobile-close" @click="closeMobileMenu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html" @click="closeMobileMenu">home</a></li>
+                    <li><a href="rooms.html" @click="closeMobileMenu">rooms</a></li>
+                    <li><a href="services.html" @click="closeMobileMenu">services</a></li>
+                    <li><a href="gallery.html" class="active" @click="closeMobileMenu">gallery</a></li>
+                    <li><a href="about.html" @click="closeMobileMenu">about</a></li>
+                    <li><a href="reviews & contact Us.html" @click="closeMobileMenu">reviews & contact Us.html</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1920&q=80" alt="Serenity Palace Hotel">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <p class="hero-breadcrumb">
+                    <a href="index.html">{{ t('nav.home') }}</a>
+                    <span>―</span>
+                    {{ t('nav.about') }}
+                </p>
+                <p class="hero-label">{{ t('hero.label') }}</p>
+                <h1 class="hero-title serif">{{ t('hero.title') }}</h1>
+                <p class="hero-description">{{ t('hero.description') }}</p>
+            </div>
+            <div class="hero-scroll">
+                <span>{{ t('hero.scroll') }}</span>
+                <div class="hero-scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- Story Section -->
+        <section class="story-section">
+            <div class="story-grid">
+                <div class="story-images" data-aos="fade-up">
+                    <div class="story-image-main">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Hotel History" loading="lazy">
+                    </div>
+                    <div class="story-image-secondary">
+                        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&q=80" alt="Hotel Lobby" loading="lazy">
+                    </div>
+                    <div class="story-year">2009</div>
+                </div>
+                <div class="story-content" data-aos="fade-up">
+                    <p class="story-label">{{ t('story.label') }}</p>
+                    <h2 class="story-title serif">{{ t('story.title') }}</h2>
+                    <p class="story-text">{{ t('story.text1') }}</p>
+                    <p class="story-text">{{ t('story.text2') }}</p>
+                    <div class="story-signature">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80" alt="Founder" class="signature-image">
+                        <div class="signature-info">
+                            <h4>{{ t('story.founder') }}</h4>
+                            <p>{{ t('story.founderTitle') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission & Vision -->
+        <section class="mission-section">
+            <div class="mission-pattern"></div>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">{{ t('mission.label') }}</span>
+                <h2 class="section-title serif" style="color: var(--ivory);">{{ t('mission.title') }}</h2>
+            </div>
+            <div class="mission-grid">
+                <div class="mission-card" data-aos="fade-up">
+                    <svg class="mission-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 16v-4M12 8h.01"></path>
+                    </svg>
+                    <h3>{{ t('mission.missionTitle') }}</h3>
+                    <p>{{ t('mission.missionText') }}</p>
+                </div>
+                <div class="mission-card" data-aos="fade-up" data-aos-delay="100">
+                    <svg class="mission-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <h3>{{ t('mission.visionTitle') }}</h3>
+                    <p>{{ t('mission.visionText') }}</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">{{ t('values.label') }}</span>
+                <h2 class="section-title serif">{{ t('values.title') }}</h2>
+                <p class="section-description">{{ t('values.description') }}</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card" v-for="(value, index) in values" :key="index" data-aos="fade-up" :data-aos-delay="index * 100">
+                    <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" v-html="value.icon"></svg>
+                    <h4>{{ t(value.title) }}</h4>
+                    <p>{{ t(value.text) }}</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="timeline-section">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">{{ t('timeline.label') }}</span>
+                <h2 class="section-title serif">{{ t('timeline.title') }}</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item" v-for="(item, index) in timeline" :key="index" data-aos="fade-up" :data-aos-delay="index * 100">
+                    <div class="timeline-content">
+                        <div class="timeline-year">{{ item.year }}</div>
+                        <h4 class="timeline-title">{{ t(item.title) }}</h4>
+                        <p class="timeline-text">{{ t(item.text) }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards Section -->
+        <section class="awards-section">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">{{ t('awards.label') }}</span>
+                <h2 class="section-title serif" style="color: var(--ivory);">{{ t('awards.title') }}</h2>
+            </div>
+            <div class="awards-grid">
+                <div class="award-card" v-for="(award, index) in awards" :key="index" data-aos="fade-up" :data-aos-delay="index * 100">
+                    <svg class="award-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" v-html="award.icon"></svg>
+                    <h4>{{ t(award.title) }}</h4>
+                    <p>{{ award.year }}</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">{{ t('team.label') }}</span>
+                <h2 class="section-title serif">{{ t('team.title') }}</h2>
+                <p class="section-description">{{ t('team.description') }}</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card" v-for="(member, index) in team" :key="index" data-aos="fade-up" :data-aos-delay="index * 100">
+                    <div class="team-image">
+                        <img :src="member.image" :alt="t(member.name)" loading="lazy">
+                    </div>
+                    <div class="team-info">
+                        <h4>{{ t(member.name) }}</h4>
+                        <p>{{ t(member.role) }}</p>
+                        <p class="team-bio">{{ t(member.bio) }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="fade-up">
+                    <div class="stat-number"><span class="counter" data-target="15">0</span><span>+</span></div>
+                    <div class="stat-label">{{ t('stats.years') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number"><span class="counter" data-target="120">0</span></div>
+                    <div class="stat-label">{{ t('stats.suites') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number"><span class="counter" data-target="50000">0</span><span>+</span></div>
+                    <div class="stat-label">{{ t('stats.guests') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-number"><span class="counter" data-target="25">0</span></div>
+                    <div class="stat-label">{{ t('stats.awards') }}</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-bg">
+                <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1920&q=80" alt="Luxury Suite">
+            </div>
+            <div class="cta-overlay"></div>
+            <div class="cta-content" data-aos="fade-up">
+                <p class="cta-label">{{ t('cta.label') }}</p>
+                <h2 class="cta-title serif">{{ t('cta.title') }}</h2>
+                <p class="cta-description">{{ t('cta.description') }}</p>
+                <a href="booking.html" class="cta-btn">
+                    {{ t('cta.button') }}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">SERENITY PALACE</a>
+                    <p>{{ t('footer.description') }}</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.explore') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="rooms.html">{{ t('nav.rooms') }}</a></li>
+                        <li><a href="#">{{ t('nav.dining') }}</a></li>
+                        <li><a href="#">{{ t('nav.spa') }}</a></li>
+                        <li><a href="#">{{ t('nav.experiences') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.information') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">{{ t('nav.about') }}</a></li>
+                        <li><a href="#">{{ t('footer.careers') }}</a></li>
+                        <li><a href="#">{{ t('footer.press') }}</a></li>
+                        <li><a href="#">{{ t('footer.privacy') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.contact') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:+971000000000">+971 00 000 0000</a></li>
+                        <li><a href="mailto:info@serenitypalace.com">info@serenitypalace.com</a></li>
+                        <li><a href="#">{{ t('footer.address') }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>{{ t('footer.copyright') }}</p>
+            </div>
+        </footer>
+    </div>
+<script src="js/about.js"></script>
+</body>
+</html>

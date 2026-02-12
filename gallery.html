@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Serenity Palace Hotel</title>
+    <meta name="description" content="Explore our exclusive gallery showcasing the luxury and elegance of Serenity Palace Hotel. View our suites, amenities, dining, and more.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="css/gallery.css">
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <!-- Preloader -->
+        <div class="preloader" :class="{ hidden: !loading }">
+            <div class="preloader-logo serif">SERENITY PALACE</div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar" :class="{ scrolled: scrolled }">
+            <a href="index.html" class="logo">SERENITY PALACE</a>
+            <ul class="nav-links">
+                <li><a href="index.html">home</a></li>
+                <li><a href="rooms.html">rooms</a></li>
+                <li><a href="services.html">services</a></li>
+                <li><a href="gallery.html" class="active">gallery</a></li>
+                <li><a href="about.html">about</a></li>
+                <li><a href="reviews & contact Us.html">reviews & contact Us</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="lang-toggle" @click="toggleLanguage">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    {{ lang === 'en' ? 'العربية' : 'English' }}
+                </button>
+                <a href="booking.html" class="btn-nav">book</a>
+                <div class="menu-toggle" @click="toggleMobileMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" :class="{ active: mobileMenuOpen }" @click="closeMobileMenu">
+            <div class="mobile-menu-content" @click.stop>
+                <button class="mobile-close" @click="closeMobileMenu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html" @click="closeMobileMenu">home</a></li>
+                    <li><a href="rooms.html" @click="closeMobileMenu">rooms</a></li>
+                    <li><a href="services.html" @click="closeMobileMenu">services</a></li>
+                    <li><a href="gallery.html" class="active" @click="closeMobileMenu">gallery</a></li>
+                    <li><a href="about.html" @click="closeMobileMenu">about</a></li>
+                    <li><a href="reviews & contact Us.html" @click="closeMobileMenu">reviews & contact Us.html</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1920&q=80" alt="Hotel Lobby">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <p class="hero-breadcrumb">
+                    <a href="index.html">{{ t('nav.home') }}</a>
+                    <span>―</span>
+                    {{ t('nav.gallery') }}
+                </p>
+                <p class="hero-label">{{ t('hero.label') }}</p>
+                <h1 class="hero-title serif">{{ t('hero.title') }}</h1>
+                <p class="hero-description">{{ t('hero.description') }}</p>
+            </div>
+            <div class="hero-scroll">
+                <span>{{ t('hero.scroll') }}</span>
+                <div class="hero-scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- Category Filter -->
+        <section class="filter-section">
+            <div class="filter-wrapper" data-aos="fade-up">
+                <button class="filter-btn" :class="{ active: activeFilter === 'all' }" @click="setFilter('all')">
+                    {{ t('filter.all') }}
+                </button>
+                <button class="filter-btn" :class="{ active: activeFilter === 'suites' }" @click="setFilter('suites')">
+                    {{ t('filter.suites') }}
+                </button>
+                <button class="filter-btn" :class="{ active: activeFilter === 'dining' }" @click="setFilter('dining')">
+                    {{ t('filter.dining') }}
+                </button>
+                <button class="filter-btn" :class="{ active: activeFilter === 'spa' }" @click="setFilter('spa')">
+                    {{ t('filter.spa') }}
+                </button>
+                <button class="filter-btn" :class="{ active: activeFilter === 'amenities' }" @click="setFilter('amenities')">
+                    {{ t('filter.amenities') }}
+                </button>
+                <button class="filter-btn" :class="{ active: activeFilter === 'events' }" @click="setFilter('events')">
+                    {{ t('filter.events') }}
+                </button>
+            </div>
+        </section>
+
+        <!-- Featured Slider -->
+        <section class="featured-section">
+            <div class="swiper featured-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide featured-slide" v-for="(item, index) in featuredImages" :key="index">
+                        <img :src="item.image" :alt="t(item.title)" loading="lazy">
+                        <div class="featured-overlay">
+                            <p class="featured-category">{{ t(item.category) }}</p>
+                            <h2 class="featured-title serif">{{ t(item.title) }}</h2>
+                            <p class="featured-description">{{ t(item.description) }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-pagination">
+                    <div class="featured-counter">
+                        <span class="current">{{ currentSlide }}</span>
+                        <span class="divider">/</span>
+                        <span class="total">{{ featuredImages.length }}</span>
+                    </div>
+                    <div class="featured-progress">
+                        <div class="featured-progress-bar" :style="{ width: progressWidth + '%' }"></div>
+                    </div>
+                </div>
+                <div class="featured-nav">
+                    <button class="featured-nav-btn featured-prev">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button class="featured-nav-btn featured-next">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Gallery Grid -->
+        <section class="gallery-section">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">{{ t('gallery.label') }}</span>
+                <h2 class="section-title serif">{{ t('gallery.title') }}</h2>
+                <p class="section-description">{{ t('gallery.description') }}</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" 
+                     v-for="(item, index) in filteredGallery" 
+                     :key="index"
+                     :class="item.size"
+                     data-aos="fade-up"
+                     :data-aos-delay="(index % 4) * 50"
+                     @click="openLightbox(index)">
+                    <img :src="item.image" :alt="t(item.title)" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="gallery-category">{{ t(item.category) }}</p>
+                        <h3 class="gallery-title">{{ t(item.title) }}</h3>
+                    </div>
+                    <div class="gallery-zoom">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35M11 8v6M8 11h6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rooms & Suites Category -->
+        <section class="category-section" >
+            <div class="category-header" data-aos="fade-up">
+                <div class="category-info">
+                    <p class="category-label">{{ t('categories.suites.label') }}</p>
+                    <h3 class="category-title serif">{{ t('categories.suites.title') }}</h3>
+                </div>
+                <div class="category-nav">
+                    <button class="category-nav-btn suites-prev">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button class="category-nav-btn suites-next">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="swiper category-swiper suites-swiper" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide category-slide" v-for="(item, index) in suitesImages" :key="index" @click="openLightboxCategory('suites', index)">
+                        <img :src="item.image" :alt="t(item.title)" loading="lazy">
+                        <div class="category-slide-overlay">
+                            <h4 class="category-slide-title">{{ t(item.title) }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spa & Wellness Category -->
+        <section class="category-section">
+            <div class="category-header" data-aos="fade-up">
+                <div class="category-info">
+                    <p class="category-label">{{ t('categories.spa.label') }}</p>
+                    <h3 class="category-title serif">{{ t('categories.spa.title') }}</h3>
+                </div>
+                <div class="category-nav">
+                    <button class="category-nav-btn spa-prev">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button class="category-nav-btn spa-next">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="swiper category-swiper spa-swiper" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide category-slide" v-for="(item, index) in spaImages" :key="index" @click="openLightboxCategory('spa', index)">
+                        <img :src="item.image" :alt="t(item.title)" loading="lazy">
+                        <div class="category-slide-overlay">
+                            <h4 class="category-slide-title">{{ t(item.title) }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="fade-up">
+                    <div class="stat-number"><span class="counter" data-target="500">0</span><span>+</span></div>
+                    <div class="stat-label">{{ t('stats.photos') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number"><span class="counter" data-target="12">0</span></div>
+                    <div class="stat-label">{{ t('stats.categories') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number"><span class="counter" data-target="120">0</span></div>
+                    <div class="stat-label">{{ t('stats.suites') }}</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-number"><span class="counter" data-target="15">0</span><span>+</span></div>
+                    <div class="stat-label">{{ t('stats.years') }}</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-bg">
+                <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1920&q=80" alt="Luxury Suite">
+            </div>
+            <div class="cta-overlay"></div>
+            <div class="cta-content" data-aos="fade-up">
+                <p class="cta-label">{{ t('cta.label') }}</p>
+                <h2 class="cta-title serif">{{ t('cta.title') }}</h2>
+                <p class="cta-description">{{ t('cta.description') }}</p>
+                <a href="booking.html" class="cta-btn">
+                    {{ t('cta.button') }}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">SERENITY PALACE</a>
+                    <p>{{ t('footer.description') }}</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.explore') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="rooms.html">{{ t('nav.rooms') }}</a></li>
+                        <li><a href="services.html">{{ t('nav.services') }}</a></li>
+                        <li><a href="gallery.html">{{ t('nav.gallery') }}</a></li>
+                        <li><a href="#">{{ t('nav.experiences') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.information') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">{{ t('nav.about') }}</a></li>
+                        <li><a href="#">{{ t('footer.careers') }}</a></li>
+                        <li><a href="#">{{ t('footer.press') }}</a></li>
+                        <li><a href="#">{{ t('footer.privacy') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">{{ t('footer.contact') }}</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:+971000000000">+971 00 000 0000</a></li>
+                        <li><a href="mailto:info@serenitypalace.com">info@serenitypalace.com</a></li>
+                        <li><a href="#">{{ t('footer.address') }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>{{ t('footer.copyright') }}</p>
+            </div>
+        </footer>
+
+        <!-- Lightbox -->
+        <div class="lightbox" :class="{ active: lightboxOpen }" @click="closeLightbox">
+            <button class="lightbox-close" @click.stop="closeLightbox">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+            <button class="lightbox-nav lightbox-prev" @click.stop="prevImage">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            <div class="lightbox-content" @click.stop>
+                <img :src="currentLightboxImage.image" :alt="t(currentLightboxImage.title)">
+                <div class="lightbox-info">
+                    <p class="lightbox-category">{{ t(currentLightboxImage.category) }}</p>
+                    <h3 class="lightbox-title serif">{{ t(currentLightboxImage.title) }}</h3>
+                </div>
+            </div>
+            <button class="lightbox-nav lightbox-next" @click.stop="nextImage">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+            </button>
+            <div class="lightbox-counter">
+                {{ lightboxIndex + 1 }} / {{ lightboxImages.length }}
+            </div>
+        </div>
+    </div>
+<script src="js/gallery.js"></script>
+</body>
+</html>
