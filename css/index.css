@@ -1458,7 +1458,7 @@
 
 
         /* Media Query للشاشات الصغيرة */
-/* @media (max-width: 768px) { 
+ @media (max-width: 768px) { 
     .rooms-section {
         display: none; 
     }
@@ -1470,4 +1470,4 @@
     .rooms-section{
         display: none;
     }
-} */
+} 
