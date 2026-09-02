@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serenity Palace Hotel | Luxury Redefined</title>
+    <title>فندق قصر السكينة | الفخامة بمعناها الراقي</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,29 +24,22 @@
     <div id="app">
         <!-- Preloader -->
         <div class="preloader" :class="{ hidden: !loading }">
-            <div class="preloader-logo serif">SERENITY PALACE</div>
+            <div class="preloader-logo serif">قصر السكينة</div>
         </div>
 
         <!-- Navigation -->
         <nav class="navbar" :class="{ scrolled: scrolled }">
-            <a href="index.html" class="logo">SERENITY PALACE</a>
+            <a href="index.html" class="logo">قصر السكينة</a>
             <ul class="nav-links">
-                <li><a href="index.html">home</a></li>
-                <li><a href="rooms.html">rooms</a></li>
-                <li><a href="services.html">services</a></li>
-                <li><a href="gallery.html" class="active">gallery</a></li>
-                <li><a href="about.html">about</a></li>
-                <li><a href="reviews & contact Us.html">reviews & contact Us</a></li>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="rooms.html">الغرف والأجنحة</a></li>
+                <li><a href="services.html">الخدمات</a></li>
+                <li><a href="gallery.html" class="active">المعرض</a></li>
+                <li><a href="about.html">من نحن</a></li>
+                <li><a href="reviews & contact Us.html">الآراء والتواصل</a></li>
             </ul>
             <div class="nav-right">
-                <button class="lang-toggle" @click="toggleLanguage">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                    </svg>
-                    {{ lang === 'en' ? 'العربية' : 'English' }}
-                </button>
-                <a href="booking.html" class="btn-nav">book</a>
+<a href="booking.html" class="btn-nav">احجز الآن</a>
                 <div class="menu-toggle" @click="toggleMobileMenu">
                     <span></span>
                     <span></span>
@@ -64,12 +57,12 @@
                     </svg>
                 </button>
                 <ul class="nav-links">
-                    <li><a href="index.html" @click="closeMobileMenu">home</a></li>
-                    <li><a href="rooms.html" @click="closeMobileMenu">rooms</a></li>
-                    <li><a href="services.html" @click="closeMobileMenu">services</a></li>
-                    <li><a href="gallery.html" class="active" @click="closeMobileMenu">gallery</a></li>
-                    <li><a href="about.html" @click="closeMobileMenu">about</a></li>
-                    <li><a href="reviews & contact Us.html" @click="closeMobileMenu">reviews & contact Us.html</a></li>
+                    <li><a href="index.html" @click="closeMobileMenu">الرئيسية</a></li>
+                    <li><a href="rooms.html" @click="closeMobileMenu">الغرف والأجنحة</a></li>
+                    <li><a href="services.html" @click="closeMobileMenu">الخدمات</a></li>
+                    <li><a href="gallery.html" class="active" @click="closeMobileMenu">المعرض</a></li>
+                    <li><a href="about.html" @click="closeMobileMenu">من نحن</a></li>
+                    <li><a href="reviews & contact Us.html" @click="closeMobileMenu">الآراء والتواصل</a></li>
                 </ul>
             </div>
         </div>
@@ -78,7 +71,7 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-media">
-                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1920&q=80" alt="Luxury Hotel Lobby">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1920&q=80" alt="ردهة الفندق الفاخرة">
             </div>
             <div class="hero-overlay"></div>
             <div class="hero-content">
@@ -133,7 +126,7 @@
 
             <div class="experience-grid" data-aos="fade-up" data-aos-delay="100">
                 <div class="experience-image">
-                    <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?w=800&q=80" alt="Personalized Hospitality">
+                    <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?w=800&q=80" alt="ضيافة شخصية">
                 </div>
                 <div class="experience-content">
                     <h3 class="serif">{{ t('exp1.title') }}</h3>
@@ -164,7 +157,7 @@
 
             <div class="experience-grid reverse" data-aos="fade-up" data-aos-delay="100">
                 <div class="experience-image">
-                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&q=80" alt="Luxury Wellness">
+                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&q=80" alt="العافية الفاخرة">
                 </div>
                 <div class="experience-content">
                     <h3 class="serif">{{ t('exp2.title') }}</h3>
@@ -232,7 +225,7 @@
                         <div class="swiper-slide">
                             <div class="room-slide">
                                 <div class="room-image">
-                                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1200&q=80" alt="Royal Suite">
+                                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1200&q=80" alt="الجناح الملكي">
                                 </div>
                                 <div class="room-content">
                                     <p class="room-category">{{ t('room1.category') }}</p>
@@ -243,7 +236,7 @@
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                                             </svg>
-                                            <span>120 m²</span>
+                                            <span>120 م²</span>
                                         </div>
                                         <div class="room-amenity">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -272,7 +265,7 @@
                         <div class="swiper-slide">
                             <div class="room-slide">
                                 <div class="room-image">
-                                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=80" alt="Presidential Suite">
+                                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=80" alt="الجناح الرئاسي">
                                 </div>
                                 <div class="room-content">
                                     <p class="room-category">{{ t('room2.category') }}</p>
@@ -283,7 +276,7 @@
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                                             </svg>
-                                            <span>200 m²</span>
+                                            <span>200 م²</span>
                                         </div>
                                         <div class="room-amenity">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -308,7 +301,7 @@
                         <div class="swiper-slide">
                             <div class="room-slide">
                                 <div class="room-image">
-                                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=80" alt="Grand Deluxe">
+                                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=80" alt="غرفة جراند ديلوكس">
                                 </div>
                                 <div class="room-content">
                                     <p class="room-category">{{ t('room3.category') }}</p>
@@ -319,7 +312,7 @@
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                                             </svg>
-                                            <span>85 m²</span>
+                                            <span>85 م²</span>
                                         </div>
                                         <div class="room-amenity">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -454,7 +447,7 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item" data-aos="fade-up" @click="openLightbox('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80')">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Gallery 1">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="صورة من المعرض 1">
                     <div class="gallery-overlay">
                         <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <circle cx="11" cy="11" r="8"></circle>
@@ -463,7 +456,7 @@
                     </div>
                 </div>
                 <div class="gallery-item" data-aos="fade-up" data-aos-delay="100" @click="openLightbox('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=80')">
-                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80" alt="Gallery 2">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80" alt="صورة من المعرض 2">
                     <div class="gallery-overlay">
                         <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <circle cx="11" cy="11" r="8"></circle>
@@ -472,7 +465,7 @@
                     </div>
                 </div>
                 <div class="gallery-item" data-aos="fade-up" data-aos-delay="150" @click="openLightbox('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80')">
-                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" alt="Gallery 3">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" alt="صورة من المعرض 3">
                     <div class="gallery-overlay">
                         <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <circle cx="11" cy="11" r="8"></circle>
@@ -481,7 +474,7 @@
                     </div>
                 </div>
                 <div class="gallery-item" data-aos="fade-up" data-aos-delay="200" @click="openLightbox('https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=1200&q=80')">
-                    <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800&q=80" alt="Gallery 4">
+                    <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800&q=80" alt="صورة من المعرض 4">
                     <div class="gallery-overlay">
                         <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <circle cx="11" cy="11" r="8"></circle>
@@ -490,7 +483,7 @@
                     </div>
                 </div>
                 <div class="gallery-item" data-aos="fade-up" data-aos-delay="250" @click="openLightbox('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80')">
-                    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80" alt="Gallery 5">
+                    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80" alt="صورة من المعرض 5">
                     <div class="gallery-overlay">
                         <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <circle cx="11" cy="11" r="8"></circle>
@@ -515,7 +508,7 @@
         <footer class="footer">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="logo">SERENITY PALACE</a>
+                    <a href="#" class="logo">قصر السكينة</a>
                     <p>{{ t('footer.description') }}</p>
                     <div class="footer-social">
                         <a href="#">
@@ -575,7 +568,7 @@
                     <path d="M18 6L6 18M6 6l12 12"></path>
                 </svg>
             </button>
-            <img :src="lightboxImage" alt="Gallery Image">
+            <img :src="lightboxImage" alt="صورة من المعرض">
         </div>
     </div>
 <script src="js/index.js"></script>

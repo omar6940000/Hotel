@@ -1,150 +1,6 @@
 
         const { createApp, ref, onMounted } = Vue;
         const translations = {
-            en: {
-                nav: {
-                    home: 'Home',
-                    rooms: 'Suites',
-                    services: 'Services',
-                    gallery: 'Gallery',
-                    about: 'About',
-                    contact: 'Contact',
-                    experiences: 'Experiences',
-                    book: 'Book Now'
-                },
-                hero: {
-                    label: 'Reviews & Contact',
-                    title: 'Hear From Our Guests & Get in Touch',
-                    description: 'Discover what makes Serenity Palace exceptional through the words of our guests, and let us assist you with any inquiries.',
-                    scroll: 'Explore'
-                },
-                stats: {
-                    reviews: 'Guest Reviews',
-                    satisfaction: 'Satisfaction Rate',
-                    rating: 'Average Rating',
-                    support: 'Support Available'
-                },
-                featured: {
-                    badge: 'Featured Review',
-                    text: 'Our stay at Serenity Palace was nothing short of extraordinary. From the moment we arrived, we were treated like royalty. The attention to detail, the impeccable service, and the stunning suites exceeded all our expectations. This is truly what luxury hospitality should be.',
-                    author: 'James & Victoria Sterling',
-                    location: 'London, United Kingdom'
-                },
-                reviews: {
-                    label: 'Guest Experiences',
-                    title: 'What Our Guests Say',
-                    description: 'Real stories from guests who have experienced the Serenity Palace difference.',
-                    r1: {
-                        text: 'The Presidential Suite was absolutely magnificent. Every detail was perfect, from the Egyptian cotton sheets to the breathtaking views. The butler service made us feel like royalty.',
-                        room: 'Presidential Suite'
-                    },
-                    r2: {
-                        text: 'An unforgettable anniversary celebration. The staff went above and beyond to make our stay special. The spa treatments were divine and the dining experience was world-class.',
-                        room: 'Royal Suite'
-                    },
-                    r3: {
-                        text: 'As a business traveler, I appreciate efficiency and comfort. Serenity Palace delivers both flawlessly. The Executive Lounge is perfect for meetings and the WiFi is lightning fast.',
-                        room: 'Executive Suite'
-                    },
-                    r4: {
-                        text: 'The honeymoon suite was pure romance. Rose petals, champagne on arrival, and the most comfortable bed we have ever slept in. We will definitely return for our anniversary.',
-                        room: 'Honeymoon Suite'
-                    },
-                    r5: {
-                        text: 'Traveling with family can be challenging, but Serenity Palace made it effortless. The kids loved the pool, and we loved the peace and quiet of our garden suite.',
-                        room: 'Garden Suite'
-                    },
-                    r6: {
-                        text: 'I have stayed at many luxury hotels around the world, but Serenity Palace stands out. The combination of modern amenities and classic elegance is perfectly balanced.',
-                        room: 'Grand Deluxe Suite'
-                    }
-                },
-                testimonials: {
-                    label: 'Testimonials',
-                    title: 'Voices of Excellence',
-                    t1: {
-                        text: 'Every moment at Serenity Palace felt like a dream. The staff remembered our preferences from our last visit two years ago. That level of personalization is rare and precious.'
-                    },
-                    t2: {
-                        text: 'The culinary experience alone is worth the visit. Chef Laurent created a private dining experience that we will never forget. Pure artistry on every plate.'
-                    },
-                    t3: {
-                        text: 'From the airport pickup to the farewell, every interaction was warm and professional. Serenity Palace sets the standard for luxury hospitality.'
-                    }
-                },
-                contact: {
-                    label: 'Get in Touch',
-                    title: 'We Would Love to Hear From You',
-                    description: 'Whether you have questions about our services, want to make a reservation, or simply wish to share your feedback, our team is here to assist you.',
-                    address: {
-                        title: 'Our Location',
-                        line1: 'Premium District, Downtown',
-                        line2: 'Dubai, United Arab Emirates'
-                    },
-                    phone: {
-                        title: 'Phone Numbers'
-                    },
-                    email: {
-                        title: 'Email Addresses'
-                    },
-                    hours: {
-                        title: 'Working Hours',
-                        reception: 'Reception: 24/7',
-                        concierge: 'Concierge: 24/7'
-                    }
-                },
-                form: {
-                    title: 'Send Us a Message',
-                    subtitle: 'Fill out the form below and we will get back to you shortly.',
-                    name: 'Full Name',
-                    namePlaceholder: 'Enter your full name',
-                    email: 'Email Address',
-                    emailPlaceholder: 'Enter your email',
-                    phone: 'Phone Number',
-                    phonePlaceholder: 'Enter your phone number',
-                    subject: 'Subject',
-                    subjectPlaceholder: 'Select a subject',
-                    subjects: {
-                        reservation: 'Reservation Inquiry',
-                        inquiry: 'General Inquiry',
-                        feedback: 'Feedback & Suggestions',
-                        partnership: 'Business Partnership',
-                        other: 'Other'
-                    },
-                    message: 'Your Message',
-                    messagePlaceholder: 'Write your message here...',
-                    submit: 'Send Message',
-                    reset: 'Clear Form'
-                },
-                map: {
-                    title: 'Visit Us',
-                    description: 'Located in the heart of Dubai\'s prestigious Premium District, Serenity Palace offers easy access to the city\'s finest attractions.',
-                    directions: 'Get Directions'
-                },
-                cta: {
-                    label: 'Ready for Luxury?',
-                    title: 'Experience Serenity Palace Today',
-                    description: 'Book your exceptional stay or contact us for personalized assistance.',
-                    bookNow: 'Book Your Stay',
-                    callUs: 'Call Us Now'
-                },
-                modal: {
-                    title: 'Message Sent!',
-                    text: 'Thank you for reaching out to Serenity Palace. Our team will review your message and respond within 24 hours.',
-                    btn: 'Close'
-                },
-                footer: {
-                    description: 'A sanctuary of refined luxury where impeccable service meets timeless elegance.',
-                    explore: 'Explore',
-                    information: 'Information',
-                    contactUs: 'Contact Us',
-                    careers: 'Careers',
-                    press: 'Press',
-                    privacy: 'Privacy Policy',
-                    address: 'Premium District, Downtown',
-                    copyright: '© 2025 Serenity Palace Hotel. All rights reserved.'
-                }
-            },
             ar: {
                 nav: {
                     home: 'الرئيسية',
@@ -296,7 +152,7 @@
                 const scrolled = ref(false);
                 const mobileMenuOpen = ref(false);
                 const showModal = ref(false);
-                const lang = ref(localStorage.getItem('lang') || 'en');
+                const lang = ref('ar');
                 const form = ref({
                     name: '',
                     email: '',
@@ -305,17 +161,17 @@
                     message: ''
                 });
                 const reviews = ref([
-                    { text: 'reviews.r1.text', room: 'reviews.r1.room', author: 'Alexander & Sofia Chen', location: 'Singapore', source: 'TripAdvisor', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80' },
-                    { text: 'reviews.r2.text', room: 'reviews.r2.room', author: 'Emma & William Taylor', location: 'New York, USA', source: 'Google', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80' },
-                    { text: 'reviews.r3.text', room: 'reviews.r3.room', author: 'Robert Mitchell', location: 'Toronto, Canada', source: 'Booking.com', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80' },
-                    { text: 'reviews.r4.text', room: 'reviews.r4.room', author: 'أحمد ونور الراشد', location: 'Dubai, UAE', source: 'TripAdvisor', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80' },
-                    { text: 'reviews.r5.text', room: 'reviews.r5.room', author: 'The Johnson Family', location: 'Sydney, Australia', source: 'Expedia', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80' },
-                    { text: 'reviews.r6.text', room: 'reviews.r6.room', author: 'Marie Laurent', location: 'Paris, France', source: 'Google', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80' }
+                    { text: 'reviews.r1.text', room: 'reviews.r1.room', author: 'ألكسندر وصوفيا تشين', location: 'سنغافورة', source: 'تريب أدفايزر', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80' },
+                    { text: 'reviews.r2.text', room: 'reviews.r2.room', author: 'إيما وويليام تايلور', location: 'نيويورك، الولايات المتحدة', source: 'جوجل', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80' },
+                    { text: 'reviews.r3.text', room: 'reviews.r3.room', author: 'روبرت ميتشل', location: 'تورونتو، كندا', source: 'بوكينج', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80' },
+                    { text: 'reviews.r4.text', room: 'reviews.r4.room', author: 'أحمد ونور الراشد', location: 'دبي، الإمارات', source: 'تريب أدفايزر', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80' },
+                    { text: 'reviews.r5.text', room: 'reviews.r5.room', author: 'عائلة جونسون', location: 'سيدني، أستراليا', source: 'إكسبيديا', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80' },
+                    { text: 'reviews.r6.text', room: 'reviews.r6.room', author: 'ماري لوران', location: 'باريس، فرنسا', source: 'جوجل', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80' }
                 ]);
                 const testimonials = ref([
-                    { text: 'testimonials.t1.text', author: 'Victoria & James Sterling', location: 'London, UK' },
-                    { text: 'testimonials.t2.text', author: 'Dr. Michael Chen', location: 'Hong Kong' },
-                    { text: 'testimonials.t3.text', author: 'Sarah & David Thompson', location: 'Los Angeles, USA' }
+                    { text: 'testimonials.t1.text', author: 'فيكتوريا وجيمس ستيرلينج', location: 'لندن، المملكة المتحدة' },
+                    { text: 'testimonials.t2.text', author: 'د. مايكل تشين', location: 'هونغ كونغ' },
+                    { text: 'testimonials.t3.text', author: 'سارة وديفيد تومسون', location: 'لوس أنجلوس، الولايات المتحدة' }
                 ]);
                 const t = (key) => {
                     const keys = key.split('.');
@@ -323,22 +179,9 @@
                     for (const k of keys) {
                         value = value?.[k];
                     }
-                    return value || key;
+                    return value || '';
                 };
-                const toggleLanguage = () => {
-                    gsap.to('body', {
-                        opacity: 0.5,
-                        duration: 0.25,
-                        onComplete: () => {
-                            lang.value = lang.value === 'en' ? 'ar' : 'en';
-                            localStorage.setItem('lang', lang.value);
-                            document.documentElement.lang = lang.value;
-                            document.documentElement.dir = lang.value === 'ar' ? 'rtl' : 'ltr';
-                            document.body.classList.toggle('rtl', lang.value === 'ar');
-                            gsap.to('body', { opacity: 1, duration: 0.3 });
-                        }
-                    });
-                };
+                const toggleLanguage = () => {};
                 const toggleMobileMenu = () => {
                     mobileMenuOpen.value = !mobileMenuOpen.value;
                     document.body.style.overflow = mobileMenuOpen.value ? 'hidden' : '';

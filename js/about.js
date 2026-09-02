@@ -2,102 +2,6 @@
         const { createApp, ref, onMounted } = Vue;
 
         const translations = {
-            en: {
-                nav: {
-                    home: 'Home',
-                    rooms: 'Suites',
-                    dining: 'Dining',
-                    spa: 'Wellness',
-                    about: 'About',
-                    experiences: 'Experiences',
-                    contact: 'Contact',
-                    book: 'Book Now'
-                },
-                hero: {
-                    label: 'Since 2009',
-                    title: 'Our Story, Your Experience',
-                    description: 'A legacy of excellence, where timeless elegance meets unparalleled hospitality. Discover the story behind Serenity Palace.',
-                    scroll: 'Discover'
-                },
-                story: {
-                    label: 'Our Heritage',
-                    title: 'A Legacy Built on Excellence',
-                    text1: 'Founded in 2009, Serenity Palace emerged from a vision to redefine luxury hospitality. What began as a dream has evolved into one of the most prestigious destinations for discerning travelers seeking an extraordinary experience.',
-                    text2: 'Every corner of our palace tells a story of meticulous craftsmanship, timeless design, and an unwavering commitment to creating moments that transcend ordinary hospitality. We believe that true luxury lies in the art of anticipating desires and exceeding expectations.',
-                    founder: 'Alexander Sterling',
-                    founderTitle: 'Founder & Chairman'
-                },
-                mission: {
-                    label: 'Our Purpose',
-                    title: 'Guided by Excellence',
-                    missionTitle: 'Our Mission',
-                    missionText: 'To create transformative experiences that inspire and rejuvenate our guests, delivering personalized luxury that exceeds expectations while honoring the traditions of gracious hospitality.',
-                    visionTitle: 'Our Vision',
-                    visionText: 'To be the global benchmark for luxury hospitality, where every stay becomes a cherished memory and every guest becomes part of our extended family.'
-                },
-                values: {
-                    label: 'Core Values',
-                    title: 'What Defines Us',
-                    description: 'These principles guide every interaction and decision, ensuring an exceptional experience for our guests.',
-                    excellence: 'Excellence',
-                    excellenceText: 'Striving for perfection in every detail, from service to ambiance.',
-                    integrity: 'Integrity',
-                    integrityText: 'Building trust through transparency and ethical practices.',
-                    innovation: 'Innovation',
-                    innovationText: 'Embracing new ideas while honoring timeless traditions.',
-                    care: 'Genuine Care',
-                    careText: 'Creating heartfelt connections with every guest we serve.'
-                },
-                timeline: {
-                    label: 'Our Journey',
-                    title: 'Milestones of Excellence',
-                    t1: { title: 'The Beginning', text: 'Serenity Palace opens its doors, introducing a new era of luxury hospitality.' },
-                    t2: { title: 'First Recognition', text: 'Awarded Best New Luxury Hotel by Travel & Leisure Magazine.' },
-                    t3: { title: 'Expansion', text: 'Opening of the renowned Serenity Spa and Wellness Center.' },
-                    t4: { title: 'Global Recognition', text: 'Named among the World\'s Top 50 Hotels by Condé Nast Traveler.' },
-                    t5: { title: 'Continuing Legacy', text: 'Celebrating 15 years of excellence and over 50,000 guests served.' }
-                },
-                awards: {
-                    label: 'Recognition',
-                    title: 'Awards & Accolades',
-                    award1: 'TripAdvisor Travelers\' Choice',
-                    award2: 'World Luxury Hotel Awards',
-                    award3: 'Forbes Travel Guide 5-Star',
-                    award4: 'Condé Nast Top 50 Hotels'
-                },
-                team: {
-                    label: 'Leadership',
-                    title: 'Meet Our Team',
-                    description: 'Dedicated professionals committed to delivering exceptional experiences.',
-                    member1: { name: 'Victoria Sterling', role: 'General Manager', bio: '20+ years in luxury hospitality' },
-                    member2: { name: 'James Chen', role: 'Director of Operations', bio: 'Expert in guest experience' },
-                    member3: { name: 'Sarah Mitchell', role: 'Head of Guest Relations', bio: 'Passionate about creating memories' },
-                    member4: { name: 'David Laurent', role: 'Executive Chef', bio: 'Michelin-starred culinary artist' }
-                },
-                stats: {
-                    years: 'Years of Excellence',
-                    suites: 'Luxury Suites',
-                    guests: 'Happy Guests',
-                    awards: 'Awards Won'
-                },
-                cta: {
-                    label: 'Begin Your Journey',
-                    title: 'Experience Our Legacy in Luxury',
-                    description: 'Let us create an unforgettable experience tailored exclusively for you.',
-                    button: 'Book Your Stay'
-                },
-                footer: {
-                    description: 'A sanctuary of refined luxury where impeccable service meets timeless elegance.',
-                    explore: 'Explore',
-                    information: 'Information',
-                    contact: 'Contact Us',
-                    careers: 'Careers',
-                    press: 'Press',
-                    privacy: 'Privacy Policy',
-                    address: 'Premium District, Downtown',
-                    copyright: '© 2025 Serenity Palace Hotel. All rights reserved.'
-                }
-            },
             ar: {
                 nav: {
                     home: 'الرئيسية',
@@ -201,7 +105,7 @@
                 const loading = ref(true);
                 const scrolled = ref(false);
                 const mobileMenuOpen = ref(false);
-                const lang = ref(localStorage.getItem('lang') || 'en');
+                const lang = ref('ar');
 
                 const values = ref([
                     { 
@@ -254,23 +158,10 @@
                     for (const k of keys) {
                         value = value?.[k];
                     }
-                    return value || key;
+                    return value || '';
                 };
 
-                const toggleLanguage = () => {
-                    gsap.to('body', {
-                        opacity: 0.5,
-                        duration: 0.25,
-                        onComplete: () => {
-                            lang.value = lang.value === 'en' ? 'ar' : 'en';
-                            localStorage.setItem('lang', lang.value);
-                            document.documentElement.lang = lang.value;
-                            document.documentElement.dir = lang.value === 'ar' ? 'rtl' : 'ltr';
-                            document.body.classList.toggle('rtl', lang.value === 'ar');
-                            gsap.to('body', { opacity: 1, duration: 0.3 });
-                        }
-                    });
-                };
+                const toggleLanguage = () => {};
 
                 const toggleMobileMenu = () => {
                     mobileMenuOpen.value = !mobileMenuOpen.value;

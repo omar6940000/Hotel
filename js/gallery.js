@@ -2,131 +2,6 @@
         const { createApp, ref, computed, onMounted, watch } = Vue;
 
         const translations = {
-            en: {
-                nav: {
-                    home: 'Home',
-                    rooms: 'Suites',
-                    services: 'Services',
-                    gallery: 'Gallery',
-                    about: 'About',
-                    experiences: 'Experiences',
-                    contact: 'Contact',
-                    book: 'Book Now'
-                },
-                hero: {
-                    label: 'Visual Journey',
-                    title: 'Explore Our Exclusive Gallery',
-                    description: 'Discover the beauty and elegance of Serenity Palace through our curated collection of images showcasing luxury at its finest.',
-                    scroll: 'Explore'
-                },
-                filter: {
-                    all: 'All',
-                    suites: 'Suites',
-                    dining: 'Dining',
-                    spa: 'Spa & Wellness',
-                    amenities: 'Amenities',
-                    events: 'Events'
-                },
-                gallery: {
-                    label: 'Photo Gallery',
-                    title: 'Moments of Elegance',
-                    description: 'Each photograph captures the essence of luxury and the attention to detail that defines our hotel.'
-                },
-                categories: {
-                    suites: {
-                        label: 'Rooms & Suites',
-                        title: 'Luxurious Accommodations'
-                    },
-                    spa: {
-                        label: 'Spa & Wellness',
-                        title: 'Sanctuary of Serenity'
-                    }
-                },
-                featured: {
-                    lobby: {
-                        category: 'Hotel Lobby',
-                        title: 'Grand Entrance Hall',
-                        description: 'Step into a world of refined elegance through our magnificent lobby adorned with crystal chandeliers.'
-                    },
-                    suite: {
-                        category: 'Presidential Suite',
-                        title: 'Ultimate Luxury Living',
-                        description: 'Experience the pinnacle of hospitality in our expansive presidential suite with panoramic views.'
-                    },
-                    pool: {
-                        category: 'Infinity Pool',
-                        title: 'Rooftop Paradise',
-                        description: 'Unwind in our stunning infinity pool overlooking the city skyline at sunset.'
-                    },
-                    restaurant: {
-                        category: 'Fine Dining',
-                        title: 'Culinary Excellence',
-                        description: 'Savor world-class cuisine in an atmosphere of sophistication and elegance.'
-                    },
-                    spa: {
-                        category: 'Wellness Center',
-                        title: 'Tranquil Retreat',
-                        description: 'Rejuvenate your body and mind in our award-winning spa sanctuary.'
-                    }
-                },
-                images: {
-                    suites: {
-                        presidential: 'Presidential Suite',
-                        royal: 'Royal Suite',
-                        grand: 'Grand Deluxe',
-                        executive: 'Executive Suite',
-                        honeymoon: 'Honeymoon Suite',
-                        garden: 'Garden Suite'
-                    },
-                    dining: {
-                        restaurant: 'Main Restaurant',
-                        lounge: 'Cocktail Lounge',
-                        terrace: 'Terrace Dining',
-                        private: 'Private Dining'
-                    },
-                    spa: {
-                        treatment: 'Treatment Room',
-                        pool: 'Spa Pool',
-                        sauna: 'Luxury Sauna',
-                        relaxation: 'Relaxation Area'
-                    },
-                    amenities: {
-                        pool: 'Infinity Pool',
-                        gym: 'Fitness Center',
-                        lobby: 'Grand Lobby',
-                        garden: 'Private Gardens'
-                    },
-                    events: {
-                        ballroom: 'Grand Ballroom',
-                        conference: 'Conference Center',
-                        wedding: 'Wedding Venue',
-                        terrace: 'Event Terrace'
-                    }
-                },
-                stats: {
-                    photos: 'Stunning Photos',
-                    categories: 'Categories',
-                    suites: 'Luxury Suites',
-                    years: 'Years of Excellence'
-                },
-                cta: {
-                    label: 'Begin Your Journey',
-                    title: 'Book Your Stay and Experience Luxury Yourself',
-                    description: 'Let us create unforgettable moments tailored exclusively for you.',
-                    button: 'Reserve Now'
-                },
-                footer: {
-                    description: 'A sanctuary of refined luxury where impeccable service meets timeless elegance.',
-                    explore: 'Explore',
-                    information: 'Information',
-                    contact: 'Contact Us',
-                    careers: 'Careers',
-                    press: 'Press',
-                    privacy: 'Privacy Policy',
-                    address: 'Premium District, Downtown',
-                    copyright: '© 2025 Serenity Palace Hotel. All rights reserved.'
-                }
-            },
             ar: {
                 nav: {
                     home: 'الرئيسية',
@@ -262,7 +137,7 @@
                 const lightboxOpen = ref(false);
                 const lightboxIndex = ref(0);
                 const lightboxImages = ref([]);
-                const lang = ref(localStorage.getItem('lang') || 'en');
+                const lang = ref('ar');
                 const activeFilter = ref('all');
                 const currentSlide = ref(1);
                 const progressWidth = ref(20);
@@ -326,23 +201,10 @@
                     for (const k of keys) {
                         value = value?.[k];
                     }
-                    return value || key;
+                    return value || '';
                 };
 
-                const toggleLanguage = () => {
-                    gsap.to('body', {
-                        opacity: 0.5,
-                        duration: 0.25,
-                        onComplete: () => {
-                            lang.value = lang.value === 'en' ? 'ar' : 'en';
-                            localStorage.setItem('lang', lang.value);
-                            document.documentElement.lang = lang.value;
-                            document.documentElement.dir = lang.value === 'ar' ? 'rtl' : 'ltr';
-                            document.body.classList.toggle('rtl', lang.value === 'ar');
-                            gsap.to('body', { opacity: 1, duration: 0.3 });
-                        }
-                    });
-                };
+                const toggleLanguage = () => {};
 
                 const toggleMobileMenu = () => {
                     mobileMenuOpen.value = !mobileMenuOpen.value;

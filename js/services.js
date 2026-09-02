@@ -2,170 +2,6 @@
         const { createApp, ref, onMounted } = Vue;
 
         const translations = {
-            en: {
-                nav: {
-                    home: 'Home',
-                    rooms: 'Suites',
-                    services: 'Services',
-                    dining: 'Dining',
-                    about: 'About',
-                    experiences: 'Experiences',
-                    contact: 'Contact',
-                    book: 'Book Now'
-                },
-                hero: {
-                    label: 'World-Class Services',
-                    title: 'Discover Our Exclusive Services & Amenities',
-                    description: 'Experience unparalleled luxury with our curated collection of services designed to elevate every moment of your stay.',
-                    scroll: 'Explore'
-                },
-                services: {
-                    label: 'Core Services',
-                    title: 'Exceptional Services for Distinguished Guests',
-                    description: 'Every service is thoughtfully crafted to exceed your expectations and create unforgettable memories.',
-                    learnMore: 'Learn More',
-                    spa: {
-                        title: 'Spa & Wellness',
-                        description: 'Rejuvenate your body and mind with our world-class spa treatments and wellness programs.'
-                    },
-                    dining: {
-                        title: 'Fine Dining',
-                        description: 'Savor exquisite culinary creations from our award-winning chefs in elegant settings.'
-                    },
-                    concierge: {
-                        title: 'Concierge Service',
-                        description: '24/7 dedicated concierge team ready to fulfill your every request and desire.'
-                    },
-                    airport: {
-                        title: 'Airport Transfer',
-                        description: 'Luxury airport pickup and drop-off service in premium vehicles with professional chauffeurs.'
-                    },
-                    fitness: {
-                        title: 'Fitness Center',
-                        description: 'State-of-the-art equipment and personal trainers available around the clock.'
-                    },
-                    pool: {
-                        title: 'Infinity Pool',
-                        description: 'Stunning rooftop pool with panoramic city views and poolside service.'
-                    },
-                    business: {
-                        title: 'Business Center',
-                        description: 'Fully equipped meeting rooms and conference facilities for corporate needs.'
-                    },
-                    butler: {
-                        title: 'Butler Service',
-                        description: 'Personal butler service for suite guests ensuring a seamless luxury experience.'
-                    }
-                },
-                amenities: {
-                    signature: 'Signature Experience',
-                    award: 'Award Winning',
-                    hours: 'Operating Hours',
-                    bookNow: 'Book Treatment',
-                    reserve: 'Reserve Table',
-                    spa: {
-                        label: 'Wellness Sanctuary',
-                        title: 'Serenity Spa & Wellness Center',
-                        description: 'Escape to our award-winning spa, where ancient healing traditions meet modern luxury. Our expert therapists offer personalized treatments designed to restore balance and rejuvenate your spirit.',
-                        feature1: 'Signature Massage Therapies',
-                        feature2: 'Luxury Facial Treatments',
-                        feature3: 'Private Couple Suites'
-                    },
-                    dining: {
-                        label: 'Culinary Excellence',
-                        title: 'The Grand Pavilion Restaurant',
-                        description: 'Embark on a culinary journey at our signature restaurant, where our Michelin-starred chef creates extraordinary dishes using the finest ingredients from around the world.',
-                        feature1: 'Michelin-Starred Cuisine',
-                        feature2: 'Extensive Wine Collection',
-                        feature3: 'Private Dining Rooms'
-                    },
-                    fitness: {
-                        label: 'Health & Vitality',
-                        title: 'Elite Fitness & Aquatic Center',
-                        description: 'Our state-of-the-art fitness center features the latest equipment, personal training services, and a stunning infinity pool with breathtaking views.',
-                        feature1: 'Personal Training Sessions',
-                        feature2: 'Infinity Pool Access',
-                        feature3: 'Yoga & Meditation Classes'
-                    }
-                },
-                gallery: {
-                    label: 'Visual Journey',
-                    title: 'Experience Our Amenities',
-                    spa: 'Serenity Spa',
-                    pool: 'Infinity Pool',
-                    restaurant: 'Fine Dining',
-                    lounge: 'Private Lounge',
-                    gym: 'Fitness Center',
-                    wellness: 'Wellness',
-                    dining: 'Culinary',
-                    leisure: 'Leisure',
-                    relaxation: 'Relaxation',
-                    gourmet: 'Gourmet'
-                },
-                experiences: {
-                    label: 'Exclusive Experiences',
-                    title: 'Curated Moments of Luxury',
-                    description: 'Discover unique experiences designed exclusively for our distinguished guests.',
-                    explore: 'Explore',
-                    butler: {
-                        title: 'Personal Butler Service',
-                        description: 'Enjoy dedicated butler service available 24/7 to anticipate and fulfill your every need.'
-                    },
-                    private: {
-                        title: 'Private Dining Experience',
-                        description: 'Indulge in an exclusive culinary journey prepared by our executive chef in intimate settings.'
-                    },
-                    lounge: {
-                        title: 'Executive Lounge Access',
-                        description: 'Exclusive access to our private lounge with premium amenities and personalized service.'
-                    },
-                    yacht: {
-                        title: 'Yacht & Helicopter Tours',
-                        description: 'Explore the coastline by private yacht or take in aerial views with our helicopter tours.'
-                    }
-                },
-                testimonials: {
-                    label: 'Guest Experiences',
-                    title: 'What Our Guests Say',
-                    t1: {
-                        service: 'Spa & Wellness',
-                        text: 'The spa experience was absolutely divine. The therapists were incredibly skilled, and the ambiance was pure luxury. I felt completely renewed.'
-                    },
-                    t2: {
-                        service: 'Fine Dining',
-                        text: 'An extraordinary culinary journey. Every dish was a masterpiece, and the service was impeccable. The wine pairing was exceptional.'
-                    },
-                    t3: {
-                        service: 'Concierge Service',
-                        text: 'The concierge team went above and beyond to make our anniversary special. Their attention to detail was remarkable.'
-                    }
-                },
-                quickAccess: {
-                    spa: 'Spa',
-                    pool: 'Pool',
-                    gym: 'Fitness',
-                    dining: 'Dining',
-                    lounge: 'Lounge',
-                    business: 'Business'
-                },
-                cta: {
-                    label: 'Begin Your Journey',
-                    title: 'Experience the Ultimate Comfort & Luxury',
-                    description: 'Let us create unforgettable moments tailored exclusively for you.',
-                    button: 'Book Your Experience'
-                },
-                footer: {
-                    description: 'A sanctuary of refined luxury where impeccable service meets timeless elegance.',
-                    explore: 'Explore',
-                    information: 'Information',
-                    contact: 'Contact Us',
-                    careers: 'Careers',
-                    press: 'Press',
-                    privacy: 'Privacy Policy',
-                    address: 'Premium District, Downtown',
-                    copyright: '© 2025 Serenity Palace Hotel. All rights reserved.'
-                }
-            },
             ar: {
                 nav: {
                     home: 'الرئيسية',
@@ -339,7 +175,7 @@
                 const mobileMenuOpen = ref(false);
                 const lightboxOpen = ref(false);
                 const lightboxImage = ref('');
-                const lang = ref(localStorage.getItem('lang') || 'en');
+                const lang = ref('ar');
 
                 const services = ref([
                     { 
@@ -423,20 +259,20 @@
                     {
                         service: 'testimonials.t1.service',
                         text: 'testimonials.t1.text',
-                        author: 'Charlotte Williams',
-                        location: 'London, UK'
+                        author: 'شارلوت ويليامز',
+                        location: 'لندن، المملكة المتحدة'
                     },
                     {
                         service: 'testimonials.t2.service',
                         text: 'testimonials.t2.text',
-                        author: 'Michael & Sarah Chen',
-                        location: 'Singapore'
+                        author: 'مايكل وسارة تشين',
+                        location: 'سنغافورة'
                     },
                     {
                         service: 'testimonials.t3.service',
                         text: 'testimonials.t3.text',
                         author: 'أحمد ونور الراشد',
-                        location: 'Dubai, UAE'
+                        location: 'دبي، الإمارات'
                     }
                 ]);
 
@@ -455,23 +291,10 @@
                     for (const k of keys) {
                         value = value?.[k];
                     }
-                    return value || key;
+                    return value || '';
                 };
 
-                const toggleLanguage = () => {
-                    gsap.to('body', {
-                        opacity: 0.5,
-                        duration: 0.25,
-                        onComplete: () => {
-                            lang.value = lang.value === 'en' ? 'ar' : 'en';
-                            localStorage.setItem('lang', lang.value);
-                            document.documentElement.lang = lang.value;
-                            document.documentElement.dir = lang.value === 'ar' ? 'rtl' : 'ltr';
-                            document.body.classList.toggle('rtl', lang.value === 'ar');
-                            gsap.to('body', { opacity: 1, duration: 0.3 });
-                        }
-                    });
-                };
+                const toggleLanguage = () => {};
 
                 const toggleMobileMenu = () => {
                     mobileMenuOpen.value = !mobileMenuOpen.value;

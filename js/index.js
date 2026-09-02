@@ -2,138 +2,6 @@
         const { createApp, ref, computed, onMounted, watch } = Vue;
 
         const translations = {
-            en: {
-                nav: {
-                    home: 'Home',
-                    rooms: 'Rooms & Suites',
-                    dining: 'Dining',
-                    spa: 'Wellness',
-                    experiences: 'Experiences',
-                    contact: 'Contact',
-                    reserve: 'Reserve'
-                },
-                hero: {
-                    subtitle: 'Welcome to Serenity Palace',
-                    title: 'Where Excellence Meets Serenity',
-                    description: 'Immerse yourself in an unparalleled journey of refined luxury, where every moment is crafted to perfection and every detail speaks of timeless elegance.',
-                    btnReserve: 'Reserve Your Stay',
-                    btnExplore: 'Explore The Experience',
-                    feature1: '5-Star Service',
-                    feature2: 'Prime Location',
-                    feature3: 'Exclusive Suites',
-                    feature4: 'Personalized Experience',
-                    scroll: 'Discover'
-                },
-                experience: {
-                    label: 'Signature Experience',
-                    title: 'A Legacy of Uncompromising Excellence',
-                    description: 'Every aspect of your stay has been thoughtfully curated to exceed the expectations of the most discerning travelers.'
-                },
-                exp1: {
-                    title: 'Personalized Hospitality',
-                    description: 'From the moment you arrive, our dedicated team anticipates your every need, creating bespoke experiences that reflect your unique preferences and desires.',
-                    feature1: 'Dedicated Personal Butler',
-                    feature2: '24/7 Concierge Service',
-                    feature3: 'Customized Amenities'
-                },
-                exp2: {
-                    title: 'Luxury Wellness Sanctuary',
-                    description: 'Discover our world-renowned spa, where ancient healing traditions merge with contemporary techniques to restore balance and rejuvenate your spirit.',
-                    feature1: 'Signature Treatments',
-                    feature2: 'Private Wellness Suites',
-                    feature3: 'Expert Therapists'
-                },
-                stats: {
-                    years: 'Years of Excellence',
-                    suites: 'Luxury Suites',
-                    satisfaction: 'Guest Satisfaction',
-                    service: 'Concierge Service'
-                },
-                rooms: {
-                    label: 'Accommodations',
-                    title: 'Exceptional Sanctuaries of Comfort',
-                    description: 'Each room and suite has been designed as a private retreat, combining sophisticated aesthetics with supreme comfort.'
-                },
-                room1: {
-                    category: 'Signature Collection',
-                    name: 'The Royal Suite',
-                    description: 'An opulent sanctuary featuring panoramic city views, a private terrace, and bespoke furnishings curated from the world\'s finest artisans.'
-                },
-                room2: {
-                    category: 'Ultimate Luxury',
-                    name: 'Presidential Suite',
-                    description: 'The pinnacle of luxury living with expansive living spaces, a private cinema, chef\'s kitchen, and dedicated butler service.'
-                },
-                room3: {
-                    category: 'Premium',
-                    name: 'Grand Deluxe Room',
-                    description: 'Elegant comfort meets sophisticated design in our spacious Grand Deluxe rooms, featuring premium amenities and stunning views.'
-                },
-                room: {
-                    guests: '{n} Guests',
-                    view: 'City View',
-                    terrace: 'Private Terrace',
-                    spa: 'In-Room Spa',
-                    night: 'night',
-                    book: 'Book Now'
-                },
-                awards: {
-                    label: 'Recognition',
-                    title: 'Awards & Accolades'
-                },
-                award1: {
-                    title: 'TripAdvisor Travelers\' Choice',
-                    year: 'Best Luxury Hotel 2025'
-                },
-                award2: {
-                    title: 'World Luxury Hotel Awards',
-                    year: 'Winner 2024 & 2025'
-                },
-                award3: {
-                    title: 'Forbes Travel Guide',
-                    year: 'Five-Star Rating'
-                },
-                testimonials: {
-                    label: 'Guest Stories',
-                    title: 'Voices of Excellence'
-                },
-                testimonial1: {
-                    text: 'An extraordinary experience that redefined our understanding of luxury. The attention to detail and personalized service exceeded every expectation.',
-                    author: 'James & Victoria Sterling',
-                    location: 'London, United Kingdom'
-                },
-                testimonial2: {
-                    text: 'From the moment we arrived, we were treated like royalty. The Serenity Palace sets a new standard for hospitality excellence.',
-                    author: 'Sofia Chen',
-                    location: 'Singapore'
-                },
-                testimonial3: {
-                    text: 'A perfect blend of timeless elegance and modern luxury. Every moment was magical, and the staff made us feel truly special.',
-                    author: 'Mohammed Al-Rashid',
-                    location: 'Dubai, UAE'
-                },
-                gallery: {
-                    label: 'Visual Journey',
-                    title: 'Glimpses of Elegance'
-                },
-                cta: {
-                    title: 'Your Exceptional Stay Begins Here',
-                    description: 'Allow us to craft an unforgettable experience tailored exclusively for you. Contact our reservations team to begin your journey.',
-                    button: 'Make a Reservation'
-                },
-                footer: {
-                    description: 'A sanctuary of refined luxury where impeccable service meets timeless elegance. Experience hospitality at its finest.',
-                    explore: 'Explore',
-                    information: 'Information',
-                    contact: 'Contact Us',
-                    about: 'About Us',
-                    careers: 'Careers',
-                    press: 'Press',
-                    privacy: 'Privacy Policy',
-                    address: 'Downtown, Premium District',
-                    copyright: '© 2025 Serenity Palace Hotel. All rights reserved.'
-                }
-            },
             ar: {
                 nav: {
                     home: 'الرئيسية',
@@ -277,7 +145,7 @@
                 const lightboxImage = ref('');
                 
                 // Language
-                const lang = ref(localStorage.getItem('lang') || 'en');
+                const lang = ref('ar');
 
                 const t = (key, params = {}) => {
                     const keys = key.split('.');
@@ -290,33 +158,10 @@
                             value = value.replace(`{${param}}`, params[param]);
                         });
                     }
-                    return value || key;
+                    return value || '';
                 };
 
-                const toggleLanguage = () => {
-                    const newLang = lang.value === 'en' ? 'ar' : 'en';
-                    
-                    // Fade out animation
-                    gsap.to('body', {
-                        opacity: 0.5,
-                        duration: 0.2,
-                        onComplete: () => {
-                            lang.value = newLang;
-                            localStorage.setItem('lang', newLang);
-                            
-                            // Update direction
-                            document.documentElement.lang = newLang;
-                            document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
-                            document.body.classList.toggle('rtl', newLang === 'ar');
-                            
-                            // Fade in animation
-                            gsap.to('body', {
-                                opacity: 1,
-                                duration: 0.3
-                            });
-                        }
-                    });
-                };
+                const toggleLanguage = () => {};
 
                 const openLightbox = (src) => {
                     lightboxImage.value = src;

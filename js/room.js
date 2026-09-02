@@ -2,169 +2,6 @@
         const { createApp, ref, computed, onMounted, watch, nextTick } = Vue;
 
         const translations = {
-            en: {
-                nav: {
-                    home: 'Home',
-                    rooms: 'Suites',
-                    dining: 'Dining',
-                    spa: 'Wellness',
-                    experiences: 'Experiences',
-                    contact: 'Contact',
-                    reserve: 'Reserve'
-                },
-                hero: {
-                    label: 'Luxury Accommodations',
-                    title: 'Suites Designed for',
-                    titleAccent: 'Exceptional Living',
-                    description: 'Each suite is a masterpiece of design and comfort, offering an unparalleled experience where every detail has been thoughtfully curated for the most discerning guests.',
-                    statSuites: 'Luxury Suites',
-                    statTypes: 'Suite Categories',
-                    statRating: 'Service Rating',
-                    scroll: 'Explore'
-                },
-                filter: {
-                    price: 'Price Range',
-                    guests: 'Guests',
-                    view: 'View Type',
-                    sortBy: 'Sort By',
-                    all: 'All Options',
-                    under: 'Under',
-                    persons: 'Persons',
-                    cityView: 'City View',
-                    seaView: 'Sea View',
-                    gardenView: 'Garden View',
-                    recommended: 'Recommended',
-                    priceLow: 'Price: Low to High',
-                    priceHigh: 'Price: High to Low',
-                    reset: 'Reset All'
-                },
-                room: {
-                    night: 'night',
-                    sqm: 'Sq. Meters',
-                    guests: 'Guests',
-                    beds: 'Beds',
-                    book: 'Reserve Suite',
-                    details: 'View Details'
-                },
-                rooms: {
-                    presidential: {
-                        category: 'Ultimate Luxury',
-                        name: 'Presidential Suite',
-                        description: 'The pinnacle of luxury living featuring expansive living spaces, a private cinema, chef\'s kitchen, and dedicated 24-hour butler service with breathtaking panoramic views.'
-                    },
-                    royal: {
-                        category: 'Signature Collection',
-                        name: 'Royal Suite',
-                        description: 'An opulent sanctuary featuring panoramic city views, a private terrace with plunge pool, and bespoke furnishings curated from the world\'s finest artisans.'
-                    },
-                    grand: {
-                        category: 'Premium',
-                        name: 'Grand Deluxe Suite',
-                        description: 'Elegant comfort meets sophisticated design in our spacious Grand Deluxe suites, featuring premium amenities, marble bathrooms, and stunning views.'
-                    },
-                    executive: {
-                        category: 'Business Elite',
-                        name: 'Executive Suite',
-                        description: 'Perfect for the discerning business traveler, featuring a dedicated workspace, high-speed connectivity, and access to our exclusive Executive Lounge.'
-                    },
-                    honeymoon: {
-                        category: 'Romance',
-                        name: 'Honeymoon Suite',
-                        description: 'A romantic haven designed for couples, featuring a private jacuzzi, champagne bar, rose petal turndown service, and intimate dining experiences.'
-                    },
-                    garden: {
-                        category: 'Serene Retreat',
-                        name: 'Garden Suite',
-                        description: 'Immerse yourself in tranquility with direct access to our private gardens, outdoor seating area, and the soothing sounds of nature.'
-                    }
-                },
-                amenities: {
-                    kingBed: 'King Size Bed',
-                    seaView: 'Sea View',
-                    cityView: 'City View',
-                    gardenView: 'Garden View',
-                    terrace: 'Private Terrace',
-                    wifi: 'High-Speed WiFi',
-                    bathroom: 'Marble Bathroom',
-                    minibar: 'Premium Minibar',
-                    butler: 'Butler Service',
-                    jacuzzi: 'Private Jacuzzi',
-                    cinema: 'Private Cinema',
-                    kitchen: 'Chef\'s Kitchen',
-                    pool: 'Plunge Pool',
-                    lounge: 'Executive Lounge',
-                    workspace: 'Private Office',
-                    dining: 'In-Room Dining'
-                },
-                badges: {
-                    exclusive: 'Most Exclusive',
-                    honeymoon: 'Romantic Escape',
-                    favorite: 'Guest Favorite',
-                    limited: 'Limited Availability'
-                },
-                stats: {
-                    suites: 'Luxury Suites',
-                    satisfaction: 'Guest Satisfaction',
-                    service: 'Concierge Service',
-                    years: 'Years of Excellence'
-                },
-                comparison: {
-                    label: 'Suite Comparison',
-                    title: 'Find Your Perfect Match',
-                    description: 'Compare our luxury accommodations side by side to discover the ideal suite for your stay.',
-                    first: 'Select First Suite',
-                    second: 'Select Second Suite',
-                    features: 'Features',
-                    size: 'Suite Size',
-                    maxGuests: 'Maximum Guests',
-                    viewType: 'View Type',
-                    terrace: 'Private Terrace',
-                    butler: 'Butler Service',
-                    price: 'Price per Night'
-                },
-                gallery: {
-                    label: 'Visual Journey',
-                    title: 'Suite Perspectives'
-                },
-                testimonials: {
-                    label: 'Guest Experiences',
-                    title: 'Stories of Excellence',
-                    t1: {
-                        room: 'Presidential Suite',
-                        text: 'The Presidential Suite exceeded every expectation. The butler service was impeccable, and the views were absolutely breathtaking. A truly once-in-a-lifetime experience.'
-                    },
-                    t2: {
-                        room: 'Royal Suite',
-                        text: 'We stayed in the Royal Suite for our anniversary and it was magical. The private terrace and plunge pool made us feel like royalty.'
-                    },
-                    t3: {
-                        room: 'Honeymoon Suite',
-                        text: 'The most romantic experience of our lives. Every detail was perfect, from the rose petals to the champagne. We will treasure these memories forever.'
-                    }
-                },
-                cta: {
-                    label: 'Begin Your Journey',
-                    title: 'Discover the Suite That Reflects Your Style',
-                    description: 'Let our dedicated team curate an unforgettable experience tailored exclusively for you.',
-                    button: 'Reserve Your Suite'
-                },
-                noResults: {
-                    title: 'No Suites Found',
-                    description: 'We couldn\'t find any suites matching your criteria. Try adjusting your filters.'
-                },
-                footer: {
-                    description: 'A sanctuary of refined luxury where impeccable service meets timeless elegance. Experience hospitality at its finest.',
-                    explore: 'Explore',
-                    information: 'Information',
-                    contact: 'Contact Us',
-                    about: 'About Us',
-                    careers: 'Careers',
-                    press: 'Press',
-                    privacy: 'Privacy Policy',
-                    address: 'Premium District, Downtown',
-                    copyright: '© 2025 Serenity Palace Hotel. All rights reserved.'
-                }
-            },
             ar: {
                 nav: {
                     home: 'الرئيسية',
@@ -337,7 +174,7 @@
                 const mobileMenuOpen = ref(false);
                 const lightboxOpen = ref(false);
                 const lightboxImage = ref('');
-                const lang = ref(localStorage.getItem('lang') || 'en');
+                const lang = ref('ar');
 
                 const filters = ref({
                     price: '',
@@ -493,20 +330,20 @@
                     {
                         room: 'testimonials.t1.room',
                         text: 'testimonials.t1.text',
-                        author: 'Alexander & Victoria Sterling',
-                        location: 'London, United Kingdom'
+                        author: 'ألكسندر وفيكتوريا ستيرلينج',
+                        location: 'لندن، المملكة المتحدة'
                     },
                     {
                         room: 'testimonials.t2.room',
                         text: 'testimonials.t2.text',
-                        author: 'Sofia & Michael Chen',
-                        location: 'Singapore'
+                        author: 'صوفيا ومايكل تشين',
+                        location: 'سنغافورة'
                     },
                     {
                         room: 'testimonials.t3.room',
                         text: 'testimonials.t3.text',
                         author: 'أحمد ونور الراشد',
-                        location: 'Dubai, UAE'
+                        location: 'دبي، الإمارات'
                     }
                 ]);
 
@@ -521,23 +358,10 @@
                             value = value.replace(`{${param}}`, params[param]);
                         });
                     }
-                    return value || key;
+                    return value || '';
                 };
 
-                const toggleLanguage = () => {
-                    gsap.to('body', {
-                        opacity: 0.5,
-                        duration: 0.25,
-                        onComplete: () => {
-                            lang.value = lang.value === 'en' ? 'ar' : 'en';
-                            localStorage.setItem('lang', lang.value);
-                            document.documentElement.lang = lang.value;
-                            document.documentElement.dir = lang.value === 'ar' ? 'rtl' : 'ltr';
-                            document.body.classList.toggle('rtl', lang.value === 'ar');
-                            gsap.to('body', { opacity: 1, duration: 0.3 });
-                        }
-                    });
-                };
+                const toggleLanguage = () => {};
 
                 const toggleMobileMenu = () => {
                     mobileMenuOpen.value = !mobileMenuOpen.value;

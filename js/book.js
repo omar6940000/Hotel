@@ -2,120 +2,6 @@
         const { createApp, ref, computed, onMounted, watch } = Vue;
 
         const translations = {
-            en: {
-                nav: {
-                    home: 'Home',
-                    rooms: 'Suites',
-                    dining: 'Dining',
-                    spa: 'Wellness',
-                    experiences: 'Experiences',
-                    contact: 'Contact',
-                    book: 'Book Now'
-                },
-                hero: {
-                    title: 'Reserve Your Exceptional Stay',
-                    description: 'Experience unparalleled luxury and personalized service. Your journey to extraordinary begins here.'
-                },
-                trust: {
-                    secure: 'Secure Payment',
-                    rated: '5-Star Rated',
-                    support: '24/7 Support',
-                    confirm: 'Instant Confirmation'
-                },
-                form: {
-                    stayDetails: 'Stay Details',
-                    checkIn: 'Check-in Date',
-                    checkOut: 'Check-out Date',
-                    selectDate: 'Select date',
-                    guests: 'Number of Guests',
-                    guest: 'Guest',
-                    guestsLabel: 'Guests',
-                    roomType: 'Suite Type',
-                    night: 'night',
-                    guestInfo: 'Guest Information',
-                    fullName: 'Full Name',
-                    enterName: 'Enter your full name',
-                    email: 'Email Address',
-                    enterEmail: 'Enter your email',
-                    phone: 'Phone Number',
-                    enterPhone: 'Enter your phone number',
-                    country: 'Country',
-                    selectCountry: 'Select your country',
-                    requests: 'Special Requests',
-                    enterRequests: 'Any special requests or preferences...',
-                    extras: 'Enhance Your Stay',
-                    payment: 'Payment Method'
-                },
-                extras: {
-                    airport: 'Airport Pickup',
-                    breakfast: 'Daily Breakfast',
-                    spa: 'Spa Access'
-                },
-                payment: {
-                    card: 'Credit Card',
-                    hotel: 'Pay at Hotel',
-                    cardNumber: 'Card Number',
-                    expiry: 'Expiry Date',
-                    cvv: 'CVV',
-                    cardName: 'Cardholder Name',
-                    nameOnCard: 'Name on card'
-                },
-                countries: {
-                    ae: 'United Arab Emirates',
-                    sa: 'Saudi Arabia',
-                    us: 'United States',
-                    uk: 'United Kingdom',
-                    fr: 'France',
-                    de: 'Germany',
-                    other: 'Other'
-                },
-                rooms: {
-                    presidential: 'Presidential Suite',
-                    royal: 'Royal Suite',
-                    grand: 'Grand Deluxe Suite',
-                    executive: 'Executive Suite',
-                    honeymoon: 'Honeymoon Suite',
-                    garden: 'Garden Suite'
-                },
-                views: {
-                    city: 'City View',
-                    sea: 'Sea View',
-                    garden: 'Garden View'
-                },
-                summary: {
-                    title: 'Booking Summary',
-                    subtitle: 'Your reservation details',
-                    checkIn: 'Check-in',
-                    checkOut: 'Check-out',
-                    nights: 'Duration',
-                    nightsLabel: 'nights',
-                    roomRate: 'Room Rate',
-                    subtotal: 'Subtotal',
-                    tax: 'Taxes & Fees',
-                    total: 'Total',
-                    note: 'Includes all taxes and fees',
-                    confirm: 'Confirm Reservation',
-                    secure: 'Secure & Encrypted'
-                },
-                modal: {
-                    title: 'Reservation Confirmed!',
-                    text: 'Thank you for choosing Serenity Palace. A confirmation email has been sent to your email address with all the details of your stay.',
-                    refLabel: 'Confirmation Number',
-                    btn: 'Back to Home'
-                },
-                footer: {
-                    description: 'A sanctuary of refined luxury where impeccable service meets timeless elegance.',
-                    explore: 'Explore',
-                    information: 'Information',
-                    contact: 'Contact Us',
-                    about: 'About Us',
-                    careers: 'Careers',
-                    press: 'Press',
-                    privacy: 'Privacy Policy',
-                    address: 'Premium District, Downtown',
-                    copyright: '© 2025 Serenity Palace Hotel. All rights reserved.'
-                }
-            },
             ar: {
                 nav: {
                     home: 'الرئيسية',
@@ -170,7 +56,7 @@
                     hotel: 'الدفع في الفندق',
                     cardNumber: 'رقم البطاقة',
                     expiry: 'تاريخ الانتهاء',
-                    cvv: 'CVV',
+                    cvv: 'رمز التحقق',
                     cardName: 'اسم حامل البطاقة',
                     nameOnCard: 'الاسم على البطاقة'
                 },
@@ -239,7 +125,7 @@
                 const mobileMenuOpen = ref(false);
                 const showModal = ref(false);
                 const bookingRef = ref('');
-                const lang = ref(localStorage.getItem('lang') || 'en');
+                const lang = ref('ar');
 
                 const rooms = ref([
                     { id: 1, name: 'rooms.presidential', price: 3500, size: 250, guests: 6, view: 'views.city', image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80' },
@@ -278,7 +164,7 @@
                     for (const k of keys) {
                         value = value?.[k];
                     }
-                    return value || key;
+                    return value || '';
                 };
 
                 const selectedRoom = computed(() => {
@@ -312,21 +198,7 @@
                            booking.value.phone;
                 });
 
-                const toggleLanguage = () => {
-                    gsap.to('body', {
-                        opacity: 0.5,
-                        duration: 0.25,
-                        onComplete: () => {
-                            lang.value = lang.value === 'en' ? 'ar' : 'en';
-                            localStorage.setItem('lang', lang.value);
-                            document.documentElement.lang = lang.value;
-                            document.documentElement.dir = lang.value === 'ar' ? 'rtl' : 'ltr';
-                            document.body.classList.toggle('rtl', lang.value === 'ar');
-                            initDatepickers();
-                            gsap.to('body', { opacity: 1, duration: 0.3 });
-                        }
-                    });
-                };
+                const toggleLanguage = () => {};
 
                 const toggleMobileMenu = () => {
                     mobileMenuOpen.value = !mobileMenuOpen.value;
@@ -339,8 +211,8 @@
                 };
 
                 const generateRef = () => {
-                    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-                    let ref = 'SP-';
+                    const chars = '0123456789';
+                    let ref = 'حجز-';
                     for (let i = 0; i < 8; i++) {
                         ref += chars.charAt(Math.floor(Math.random() * chars.length));
                     }

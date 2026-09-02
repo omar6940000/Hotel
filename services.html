@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services & Amenities | Serenity Palace Hotel</title>
-    <meta name="description" content="Discover our exclusive services and world-class amenities. From spa & wellness to fine dining, experience luxury at its finest.">
+    <title>الخدمات والمرافق | فندق قصر السكينة</title>
+    <meta name="description" content="اكتشف خدماتنا ومرافقنا الحصرية، من السبا والعافية إلى المطاعم الفاخرة، واستمتع بتجربة ضيافة متكاملة.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,29 +26,22 @@
     <div id="app">
         <!-- Preloader -->
         <div class="preloader" :class="{ hidden: !loading }">
-            <div class="preloader-logo serif">SERENITY PALACE</div>
+            <div class="preloader-logo serif">قصر السكينة</div>
         </div>
 
         <!-- Navigation -->
         <nav class="navbar" :class="{ scrolled: scrolled }">
-            <a href="index.html" class="logo">SERENITY PALACE</a>
+            <a href="index.html" class="logo">قصر السكينة</a>
             <ul class="nav-links">
-                <li><a href="index.html">home</a></li>
-                <li><a href="rooms.html">rooms</a></li>
-                <li><a href="services.html">services</a></li>
-                <li><a href="gallery.html" class="active">gallery</a></li>
-                <li><a href="about.html">about</a></li>
-                <li><a href="reviews & contact Us.html">reviews & contact Us</a></li>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="rooms.html">الغرف والأجنحة</a></li>
+                <li><a href="services.html">الخدمات</a></li>
+                <li><a href="gallery.html" class="active">المعرض</a></li>
+                <li><a href="about.html">من نحن</a></li>
+                <li><a href="reviews & contact Us.html">الآراء والتواصل</a></li>
             </ul>
             <div class="nav-right">
-                <button class="lang-toggle" @click="toggleLanguage">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                    </svg>
-                    {{ lang === 'en' ? 'العربية' : 'English' }}
-                </button>
-                <a href="booking.html" class="btn-nav">book</a>
+<a href="booking.html" class="btn-nav">احجز الآن</a>
                 <div class="menu-toggle" @click="toggleMobileMenu">
                     <span></span>
                     <span></span>
@@ -66,12 +59,12 @@
                     </svg>
                 </button>
                 <ul class="nav-links">
-                    <li><a href="index.html" @click="closeMobileMenu">home</a></li>
-                    <li><a href="rooms.html" @click="closeMobileMenu">rooms</a></li>
-                    <li><a href="services.html" @click="closeMobileMenu">services</a></li>
-                    <li><a href="gallery.html" class="active" @click="closeMobileMenu">gallery</a></li>
-                    <li><a href="about.html" @click="closeMobileMenu">about</a></li>
-                    <li><a href="reviews & contact Us.html" @click="closeMobileMenu">reviews & contact Us.html</a></li>
+                    <li><a href="index.html" @click="closeMobileMenu">الرئيسية</a></li>
+                    <li><a href="rooms.html" @click="closeMobileMenu">الغرف والأجنحة</a></li>
+                    <li><a href="services.html" @click="closeMobileMenu">الخدمات</a></li>
+                    <li><a href="gallery.html" class="active" @click="closeMobileMenu">المعرض</a></li>
+                    <li><a href="about.html" @click="closeMobileMenu">من نحن</a></li>
+                    <li><a href="reviews & contact Us.html" @click="closeMobileMenu">الآراء والتواصل</a></li>
                 </ul>
             </div>
         </div>
@@ -79,7 +72,7 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-bg">
-                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1920&q=80" alt="Luxury Pool">
+                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1920&q=80" alt="المسبح الفاخر">
             </div>
             <div class="hero-overlay"></div>
             <div class="hero-content">
@@ -125,7 +118,7 @@
             <!-- Spa & Wellness -->
             <div class="amenity-showcase" data-aos="fade-up">
                 <div class="amenity-image">
-                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1200&q=80" alt="Spa & Wellness" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1200&q=80" alt="السبا والعافية" loading="lazy">
                     <div class="amenity-badge">{{ t('amenities.signature') }}</div>
                 </div>
                 <div class="amenity-content">
@@ -157,7 +150,7 @@
                             <circle cx="12" cy="12" r="10"></circle>
                             <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
-                        <span>{{ t('amenities.hours') }}: 7:00 AM - 10:00 PM</span>
+                        <span>{{ t('amenities.hours') }}: 7:00 صباحًا - 10:00 مساءً</span>
                     </div>
                     <a href="#" class="btn-amenity">
                         {{ t('amenities.bookNow') }}
@@ -171,7 +164,7 @@
             <!-- Fine Dining -->
             <div class="amenity-showcase reverse" data-aos="fade-up">
                 <div class="amenity-image">
-                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80" alt="Fine Dining" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80" alt="المطاعم الفاخرة" loading="lazy">
                     <div class="amenity-badge">{{ t('amenities.award') }}</div>
                 </div>
                 <div class="amenity-content">
@@ -203,7 +196,7 @@
                             <circle cx="12" cy="12" r="10"></circle>
                             <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
-                        <span>{{ t('amenities.hours') }}: 6:30 PM - 11:00 PM</span>
+                        <span>{{ t('amenities.hours') }}: 6:30 مساءً - 11:00 مساءً</span>
                     </div>
                     <a href="#" class="btn-amenity">
                         {{ t('amenities.reserve') }}
@@ -217,7 +210,7 @@
             <!-- Fitness & Pool -->
             <div class="amenity-showcase" data-aos="fade-up">
                 <div class="amenity-image">
-                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80" alt="Fitness Center" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80" alt="مركز اللياقة" loading="lazy">
                 </div>
                 <div class="amenity-content">
                     <p class="amenity-label">{{ t('amenities.fitness.label') }}</p>
@@ -339,7 +332,7 @@
         <!-- CTA Section -->
         <section class="cta-section">
             <div class="cta-bg">
-                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1920&q=80" alt="Luxury Pool">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1920&q=80" alt="المسبح الفاخر">
             </div>
             <div class="cta-overlay"></div>
             <div class="cta-content" data-aos="fade-up">
@@ -359,21 +352,21 @@
         <footer class="footer">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="index.html" class="logo">SERENITY PALACE</a>
+                    <a href="index.html" class="logo">قصر السكينة</a>
                     <p>{{ t('footer.description') }}</p>
                     <div class="footer-social">
-                        <a href="#" aria-label="Facebook">
+                        <a href="#" aria-label="فيسبوك">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                             </svg>
                         </a>
-                        <a href="#" aria-label="Instagram">
+                        <a href="#" aria-label="إنستغرام">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"></path>
                             </svg>
                         </a>
-                        <a href="#" aria-label="Twitter">
+                        <a href="#" aria-label="تويتر">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
                             </svg>
@@ -419,7 +412,7 @@
                     <path d="M18 6L6 18M6 6l12 12"></path>
                 </svg>
             </button>
-            <img :src="lightboxImage" alt="Gallery Image">
+            <img :src="lightboxImage" alt="صورة من المعرض">
         </div>
     </div>
 <script src="js/services.js"></script>
